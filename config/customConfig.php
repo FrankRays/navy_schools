@@ -2,12 +2,13 @@
 
 return [
     'names' =>[
-        'siteName' => 'Velonic'
+        'siteName' => 'SCHOOL MANAGEMENT'
     ],
     'roles' =>[
         'admin' => 'Admin',
-        'user' => 'User'
-
+        'user' => 'User',
+        'electrical' => 'Electrical School Admin',
+        'engineering' => 'Engineering School Admin',
+        'seamanship' => 'Seamanship School Admin'
     ]
 ];
-
