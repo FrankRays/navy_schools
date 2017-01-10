@@ -148,6 +148,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Artdarek\OAuth\OAuthServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -200,6 +201,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Entrust'   =>Zizaco\Entrust\EntrustFacade::class,
         'OAuth'     => Artdarek\OAuth\Facade\OAuth::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+
     ],
 
 ];

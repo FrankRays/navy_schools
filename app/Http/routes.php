@@ -22,7 +22,7 @@ Route::group(['middleware' => 'guest'], function(){
 
 	Route::get('register', ['as'=>'register','uses' => 'UserController@create']);
 	Route::post('register', ['as'=>'postRegister','uses' => 'UserController@store']);
-	
+
 	// Password reset link request routes...
 	Route::get('password/email', ['as' => 'passwordRequest','uses' => 'Auth\PasswordController@getEmail']);
 	Route::post('password/email', ['as' => 'postPasswordRequest', 'uses' => 'Auth\PasswordController@postEmail']);
@@ -58,6 +58,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('demo/{id}/show',['as' => 'demo.show', 'uses' => 'DemoController@show']);
 	Route::put('demo/{id}',['as' => 'demo.update', 'uses' => 'DemoController@update']);
 	Route::get('demo/delete/{id}',['as' => 'demo.delete', 'uses' => 'DemoController@destroy']);
+
+	// Student CRUD
+	Route::get('student',['as' => 'student.index', 'uses' => 'StudentsController@index']);
+	Route::get('student/create',['as' => 'student.create', 'uses' => 'StudentsController@create']);
+	Route::post('student',['as' => 'student.store', 'uses' => 'StudentsController@store']);
+	Route::get('student/{id}/edit',['as' => 'student.edit', 'uses' => 'StudentsController@edit']);
+	Route::get('student/{id}/show',['as' => 'student.show', 'uses' => 'StudentsController@show']);
+	Route::put('student/{id}',['as' => 'student.update', 'uses' => 'StudentsController@update']);
+	Route::get('student/delete/{id}',['as' => 'student.delete', 'uses' => 'StudentsController@destroy']);
+
+	//Schools Routes
+	Route::get('school/{id}',['as' => 'school.show', 'uses' => 'SchoolsController@show']);
+	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'SchoolsController@classIndex']);
+
+	Route::get('school/{id}/course',['as' => 'school.course.index', 'uses' => 'SchoolsController@courseIndex']);
 });
 
 /* // Language CRUD

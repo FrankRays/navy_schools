@@ -1,4 +1,4 @@
-<!-- Notification -->
+<!-- 
 <li class="dropdown">
     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
         <i class="fa fa-bell-o"></i>
@@ -31,5 +31,4 @@
             <p><a href="#" class="text-right">See all notifications</a></p>
         </li>
     </ul>
-</li>
-<!-- /Notification -->
+</li> -->

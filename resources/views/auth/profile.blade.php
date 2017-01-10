@@ -61,7 +61,7 @@
                                 <h1>{{$user->name}}</h1>
                                 <span class="designation">PRODUCT DESIGNER (UX / UI / Visual Interaction)</span>
                                 <p>
-                                    I have 10 years of experience designing for the web, and specialize in the areas of user interface design, interaction design, visual design and prototyping. I’ve worked with notable startups including Pearl Street Software.
+                                    I have 10 years of experience designing for the web, and specialize in the areas of user interface design, interaction design, visual design and prototyping. Iï¿½ve worked with notable startups including Pearl Street Software.
                                 </p>
 
 
@@ -281,4 +281,3 @@
 
 
 @stop
-

@@ -12,7 +12,7 @@
 <div class="wrapper-page animated fadeInDown">
     <div class="panel panel-color panel-primary">
         <div class="panel-heading">
-            <h3 class="text-center m-t-10"> Sign Up || InfancyIT</h3>
+            <h3 class="text-center m-t-10"> Navy Schools</h3>
         </div>
         <br>
         @include('includes.alert')
