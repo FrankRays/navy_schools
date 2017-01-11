@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 use App\School;
 use App\Classes;
 use App\Course;
@@ -27,6 +29,7 @@ class SchoolsController extends Controller
         $classes = Classes::where('school_id', $id)->get();
         return view('schools.classes.index')
                 ->with('title', 'Classes')
+                ->with('school_id', $id)
                 ->with('classes', $classes);
     }
 
@@ -34,7 +37,8 @@ class SchoolsController extends Controller
     {
         $courses = Course::where('school_id', $id)->get();
         return view('schools.courses.index')
-                ->with('title', 'Classes')
+                ->with('title', 'Courses')
+                ->with('school_id', $id)
                 ->with('classes', $courses);
     }
 
@@ -43,9 +47,13 @@ class SchoolsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createCourse($school_id)
     {
-        //
+        $school = School::findOrFail($school_id);
+
+        return view('schools.courses.create')
+                ->with('title','Create Course')
+                ->with('school', $school);
     }
 
     /**
@@ -54,9 +62,69 @@ class SchoolsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeCourse( $school_id, Request $request)
     {
-        //
+        $rules =[
+            'name'          =>  'required',
+            'code'          =>  'required',
+            'officer'       =>  'required',
+            'officer_mobile'=>  'required',
+            'chief'         =>  'required',
+            'chief_mobile'  =>  'required',
+            'strength'      =>  'required',
+            'duration'      =>  'required',
+            'start_date'    =>  'required',
+            'end_date'      =>  'required'
+        ];
+
+        $data = $request->all();
+
+        $validation = Validator::make($data,$rules);
+
+        if($validation->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validation);
+        }else{
+            
+            $school = School::findOrFail($school_id);
+            
+            $course = new Course();
+            $course->school_id = $school_id;
+            $course->name = $data['name'];
+            $course->code = $data['code'];
+            $course->officer = $data['officer'];
+            $course->officer_mobile = $data['officer_mobile'];
+            $course->chief = $data['chief'];
+            $course->chief_mobile = $data['chief_mobile'];
+            $course->strength = $data['strength'];
+            $course->duration = $data['duration'];
+            $course->start_date = $data['start_date'];
+            $course->end_date = $data['end_date'];
+
+            if($course->save()){
+                return redirect()->back()
+                ->with('success', 'course saved successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to create course!');
+            }
+        }
+    }
+
+    public function deleteCourse($school_id, $course_id)
+    {
+        $course = Course::findOrFail($course_id);
+        
+        if($course->delete()){
+                return redirect()->back()
+                ->with('success', 'course deleted successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to delete course!');
+            }
     }
 
     /**

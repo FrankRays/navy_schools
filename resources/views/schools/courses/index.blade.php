@@ -17,7 +17,10 @@
                                     <h4>{{ $title }}</h4>
                                 </div>
                                 <div class="col-md-6">
-                                     <a class="pull-right" href="#"><button class="btn btn-success">Add a course</button></a>
+                                     <a class="pull-right" 
+                                        href="{{ route('school.course.create', $school_id) }}">
+                                        <button class="btn btn-success">Add a course</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +45,7 @@
                                                 <td>
                                                   <a href="#" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
                                                   <a href="#" class="btn btn-success btn-xs btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
-                                                  <a href="#" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a></td>
+                                                  <a href="{!! route('school.course.delete',[$school_id,$demo->id]) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a></td>
                                             </tr>
 
                                         @endforeach

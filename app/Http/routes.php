@@ -70,9 +70,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
 	//Schools Routes
 	Route::get('school/{id}',['as' => 'school.show', 'uses' => 'SchoolsController@show']);
-	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'SchoolsController@classIndex']);
-
+	//school courses
 	Route::get('school/{id}/course',['as' => 'school.course.index', 'uses' => 'SchoolsController@courseIndex']);
+	Route::get('school/{id}/course/create',['as' => 'school.course.create', 'uses' => 'SchoolsController@createCourse']);
+	Route::post('school/{id}/course/create',['as' => 'school.course.store', 'uses' => 'SchoolsController@storeCourse']);
+	Route::get('school/{school_id}/course/delete/{course_id}',['as' => 'school.course.delete', 'uses' => 'SchoolsController@deleteCourse']);
+	
+	//school classes
+	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'SchoolsController@classIndex']);
 });
 
 /* // Language CRUD
