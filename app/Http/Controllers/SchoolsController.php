@@ -127,6 +127,77 @@ class SchoolsController extends Controller
             }
     }
 
+    public function showCourse($school_id, $course_id)
+    {
+        $course = Course::findOrFail($course_id);
+        return view('schools.courses.show')
+                ->with('title', $course->name.' '.$course->code)
+                ->with('course', $course)
+                ->with('school_id', $school_id);
+    }
+
+    public function editCourse($school_id, $course_id)
+    {
+        $course = Course::findOrFail($course_id);
+
+        return view('schools.courses.edit')
+                ->with('title', 'Edit Course')
+                ->with('course', $course)
+                ->with('school_id', $school_id);
+    }
+
+    public function updateCourse($school_id, $course_id, Request $request)
+    {
+        $rules =[
+            'name'          =>  'required',
+            'code'          =>  'required',
+            'officer'       =>  'required',
+            'officer_mobile'=>  'required',
+            'chief'         =>  'required',
+            'chief_mobile'  =>  'required',
+            'strength'      =>  'required',
+            'duration'      =>  'required',
+            'start_date'    =>  'required',
+            'end_date'      =>  'required'
+        ];
+
+        $data = $request->all();
+
+        $validation = Validator::make($data,$rules);
+
+        if($validation->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validation);
+        }else{
+            
+            $school = School::findOrFail($school_id);
+            
+            $course = Course::findOrFail($course_id);
+
+            $course->school_id = $school_id;
+            $course->name = $data['name'];
+            $course->code = $data['code'];
+            $course->officer = $data['officer'];
+            $course->officer_mobile = $data['officer_mobile'];
+            $course->chief = $data['chief'];
+            $course->chief_mobile = $data['chief_mobile'];
+            $course->strength = $data['strength'];
+            $course->duration = $data['duration'];
+            $course->start_date = $data['start_date'];
+            $course->end_date = $data['end_date'];
+
+            if($course->save()){
+                return redirect()->back()
+                ->with('success', 'course updated successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to update course!');
+            }
+        }
+    }
+
     /**
      * Display the specified resource.
      *
