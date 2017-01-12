@@ -58,11 +58,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td><b>Start Date</b></td>
-                                                    <td class="ng-binding">{!! date('d-m-y', strtotime($course->start_date)) !!}</td>
+                                                    <td class="ng-binding">{!! Carbon\Carbon::parse($course->start_date)->format('d/m/Y') !!}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>End Date</b></td>
-                                                    <td class="ng-binding">{!! date('d-m-y', strtotime($course->end_date)) !!}</td>
+                                                    <td class="ng-binding">{!! Carbon\Carbon::parse($course->end_date)->format('d/m/Y') !!}</td>
                                                 </tr>
 
 

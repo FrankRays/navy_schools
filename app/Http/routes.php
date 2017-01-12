@@ -72,6 +72,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('school/{id}',['as' => 'school.show', 'uses' => 'SchoolsController@show']);
 	//school courses
 	Route::get('school/{id}/course',['as' => 'school.course.index', 'uses' => 'SchoolsController@courseIndex']);
+	Route::get('school/{id}/course/ongoing',['as' => 'school.course.ongoing', 'uses' => 'SchoolsController@ongoingCourses']);
+	Route::get('school/{id}/course/awaiting',['as' => 'school.course.awaiting', 'uses' => 'SchoolsController@awaitingCourses']);
+	Route::get('school/{id}/course/archive',['as' => 'school.course.archive', 'uses' => 'SchoolsController@archive']);
+	Route::get('school/{id}/course/archive/{course_name}',['as' => 'school.course.archive.list', 'uses' => 'SchoolsController@archiveList']);
 	Route::get('school/{id}/course/create',['as' => 'school.course.create', 'uses' => 'SchoolsController@createCourse']);
 	Route::post('school/{id}/course/create',['as' => 'school.course.store', 'uses' => 'SchoolsController@storeCourse']);
 	Route::get('school/{school_id}/course/show/{course_id}',['as' => 'school.course.show', 'uses' => 'SchoolsController@showCourse']);

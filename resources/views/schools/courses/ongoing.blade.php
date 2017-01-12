@@ -34,16 +34,20 @@
                                             <th>id</th>
                                             <th>Name</th>
                                             <th>Code</th>
+                                            <th>Starting Date</th>
+                                            <th>Termination Date</th>
                                             <th>#</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($classes as $demo)
+                                        @foreach ($courses as $demo)
 
                                             <tr>
                                                 <td>{!! $demo->id !!}</td>
                                                 <td>{!! $demo->name !!}</td>
                                                 <td>{!! $demo->code !!}</td>
+                                                <td>{!! Carbon\Carbon::parse($demo->start_date)->format('d/m/Y') !!}</td>
+                                                <td>{!! Carbon\Carbon::parse($demo->end_date)->format('d/m/Y') !!}</td>
                                                 <td>
                                                   <a href="{!! route('school.course.show',[$school_id,$demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
                                                   <a href="{!! route('school.course.edit',[$school_id,$demo->id]) !!}" class="btn btn-success btn-xs btn-archive" href="#" style="margin-right: 3px;">Edit</a>

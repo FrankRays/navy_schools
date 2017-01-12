@@ -19,9 +19,16 @@ class SchoolsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($id)
     {
-        //
+        $school = School::where('id',$id)
+                        ->with('classes')
+                        ->with('courses')
+                        ->first();
+
+        return view('schools.school')
+                ->with('title', $school->name)
+                ->with('school',$school);
     }
 
     public function classIndex($id)
@@ -40,6 +47,73 @@ class SchoolsController extends Controller
                 ->with('title', 'Courses')
                 ->with('school_id', $id)
                 ->with('classes', $courses);
+    }
+
+    public function ongoingCourses($school_id)
+    {
+        $date = Carbon::now();
+        $courses = Course::where('school_id', $school_id)   
+                            ->where('start_date','<=',$date)
+                            ->where('end_date','>=', $date)
+                            ->get();
+
+        return view('schools.courses.ongoing')
+                ->with('title', 'Ongoing Courses')
+                ->with('courses', $courses)
+                ->with('school_id', $school_id);
+    }
+
+    public function awaitingCourses($school_id)
+    {
+        $date = Carbon::now();
+        $courses = Course::where('school_id', $school_id)   
+                            ->where('start_date','>=',$date)
+                            ->where('end_date','>=', $date)
+                            ->get();
+
+        return view('schools.courses.awaiting')
+                ->with('title', 'Awaiting Courses')
+                ->with('courses', $courses)
+                ->with('today', $date)
+                ->with('school_id', $school_id);
+    }
+
+    public function archive($school_id)
+    {
+        $date = Carbon::now();
+        $course_names = Course::select('name')
+                                ->where('school_id', $school_id)
+                                ->distinct(['name'])
+                                ->get();
+
+        // $courses = Course::where('school_id', $school_id)
+        //                     ->where('name')   
+        //                     ->where('start_date','<=',$date)
+        //                     ->where('end_date','<=', $date)
+        //                     ->get();
+
+        return view('schools.courses.archive')
+                ->with('title', 'Archive')
+                ->with('courses', $course_names)
+                ->with('school_id', $school_id);
+    }
+
+    public function archiveList($school_id, $course_name)
+    {
+        
+        $date = Carbon::now();
+        $courses = Course::where('school_id', $school_id)
+                                ->where('name','like','%'.$course_name.'%')   
+                                ->where('start_date','<=',$date)
+                                ->where('end_date','<=', $date)
+                                ->orderBy('id','desc')
+                                ->get();
+        
+        return view('schools.courses.ongoing')
+                ->with('title', 'Archive')
+                ->with('courses', $courses)
+                ->with('school_id', $school_id);
+
     }
 
     /**
@@ -196,29 +270,6 @@ class SchoolsController extends Controller
                 ->with('error','failed to update course!');
             }
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $school = School::where('id',$id)
-                        ->with('classes')
-                        ->with('courses')
-                        ->first();
-
-        $class_number = $school->classes->count();
-        $course_number = $school->courses->count();
-
-        return view('schools.school')
-                ->with('title', $school->name)
-                ->with('school',$school)
-                ->with('class_number',$class_number)
-                ->with('course_number',$course_number);
     }
 
     /**

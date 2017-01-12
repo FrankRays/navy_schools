@@ -31,23 +31,18 @@
                                     <table  id="dataTable" class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>id</th>
                                             <th>Name</th>
-                                            <th>Code</th>
                                             <th>#</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($classes as $demo)
+                                        @foreach ($courses as $demo)
 
                                             <tr>
-                                                <td>{!! $demo->id !!}</td>
                                                 <td>{!! $demo->name !!}</td>
-                                                <td>{!! $demo->code !!}</td>
                                                 <td>
-                                                  <a href="{!! route('school.course.show',[$school_id,$demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
-                                                  <a href="{!! route('school.course.edit',[$school_id,$demo->id]) !!}" class="btn btn-success btn-xs btn-archive" href="#" style="margin-right: 3px;">Edit</a>
-                                                  <a href="{!! route('school.course.delete',[$school_id,$demo->id]) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a></td>
+                                                  <a href="{!! route('school.course.archive.list',[$school_id,$demo->name]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">view archived courses</a>
+                                                </td>
                                             </tr>
 
                                         @endforeach
