@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('foni', array('as' => 'foni', 'uses' => 'FilesController@foni'));
 	Route::get('foni/create', array('as' => 'foni.create', 'uses' => 'FilesController@createFONI'));
 	Route::post('foni/create', array('as' => 'foni.store', 'uses' => 'FilesController@storeFONI'));
+	Route::get('foni/delete/{id}', array('as' => 'foni.delete', 'uses' => 'FilesController@deleteFONI'));
 
 	// Demo CRUD
 	Route::get('demo',['as' => 'demo.index', 'uses' => 'DemoController@index']);

@@ -46,7 +46,7 @@
                                                 <a href="{!! $demo->file_path !!}" class="btn btn-default  btn-archive" style="margin-right: 3px;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                                                 </td>
                                                 <td>
-                                                  <a href="" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
+                                                  <a href="{!! route('foni.delete', $demo->id) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
                                                 </td>
                                             </tr>
 
@@ -75,7 +75,7 @@
                                                     <a href="{!! $demo->file_path !!}" class="btn btn-default  btn-archive" style="margin-right: 3px;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                                                     </td>
                                                     <td>
-                                                      <a href="" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
+                                                      <a href="{!! route('foni.delete', $demo->id) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
                                                     </td>
                                                 </tr>
 

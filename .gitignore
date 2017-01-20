@@ -23,4 +23,4 @@ composer.lock
 # Packages
 _ide_helper.php
 
-#public/uploads/
+public/uploads/

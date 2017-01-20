@@ -112,9 +112,22 @@ class FilesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function deleteFONI($id)
     {
-        //
+        try{
+            $file = File::findOrFail($id);
+            $file_path = $file->file_path;
+            if($file->delete()){
+                unlink(public_path().$file_path);
+                return Redirect::back()->with('success', 'file deleted successfully');
+            }else{
+                return redirect()->back()
+                            ->with('warning','file deletion error');
+            }
+        }catch(\Exception $ex){
+            return redirect()->back()
+                            ->with('error','file deletion error');
+        }
     }
 
     /**
