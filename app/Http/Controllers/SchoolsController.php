@@ -100,7 +100,6 @@ class SchoolsController extends Controller
 
     public function archiveList($school_id, $course_name)
     {
-        
         $date = Carbon::now();
         $courses = Course::where('school_id', $school_id)
                                 ->where('name','like','%'.$course_name.'%')   

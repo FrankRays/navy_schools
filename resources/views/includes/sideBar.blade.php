@@ -35,8 +35,9 @@
                     <li class="has-submenu"><a href="#"><i class="fa fa-user"></i> <span class="nav-label">Admin Panel</span></a>
                         <ul class="list-unstyled">
                             <li><a href="{!! route('student.index') !!}"> Students</a></li>
-                            <!-- <li><a href="#"> Engineering School</a></li>
-                            <li><a href="#"> Seamanship School</a></li> -->
+                            <li><a href="{!! route('student.index') !!}"> Staffs</a></li>
+                            <li><a href="{!! route('foni') !!}"> FO/NI</a></li>
+                            <li><a href="#"> Special Instructions</a></li>
 
                         </ul>
                     </li>
