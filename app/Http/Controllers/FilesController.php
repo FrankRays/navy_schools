@@ -118,7 +118,9 @@ class FilesController extends Controller
             $file = File::findOrFail($id);
             $file_path = $file->file_path;
             if($file->delete()){
-                unlink(public_path().$file_path);
+                if($file_path != '/uploads/files/test.pdf'){
+                    unlink(public_path().$file_path);    
+                }
                 return Redirect::back()->with('success', 'file deleted successfully');
             }else{
                 return redirect()->back()

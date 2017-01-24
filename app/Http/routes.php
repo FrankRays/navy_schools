@@ -56,6 +56,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::post('foni/create', array('as' => 'foni.store', 'uses' => 'FilesController@storeFONI'));
 	Route::get('foni/delete/{id}', array('as' => 'foni.delete', 'uses' => 'FilesController@deleteFONI'));
 
+	//special instructions
+
 	// Demo CRUD
 	Route::get('demo',['as' => 'demo.index', 'uses' => 'DemoController@index']);
 	Route::get('demo/create',['as' => 'demo.create', 'uses' => 'DemoController@create']);
@@ -76,6 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
 	//Schools Routes
 	Route::get('school/{id}',['as' => 'school.show', 'uses' => 'SchoolsController@show']);
+
 	//school courses
 	Route::get('school/{id}/course',['as' => 'school.course.index', 'uses' => 'SchoolsController@courseIndex']);
 	Route::get('school/{id}/course/ongoing',['as' => 'school.course.ongoing', 'uses' => 'SchoolsController@ongoingCourses']);
@@ -88,6 +91,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 	Route::get('school/{school_id}/course/edit/{course_id}',['as' => 'school.course.edit', 'uses' => 'SchoolsController@editCourse']);
 	Route::put('school/{school_id}/course/update/{course_id}',['as' => 'school.course.update', 'uses' => 'SchoolsController@updateCourse']);
 	Route::get('school/{school_id}/course/delete/{course_id}',['as' => 'school.course.delete', 'uses' => 'SchoolsController@deleteCourse']);
+	//admin
+	Route::get('school/{school_id}/course/approve/{course_id}',['as' => 'school.course.approve', 'uses' => 'SchoolsController@approveCourse']);
 	
 	//school classes
 	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'SchoolsController@classIndex']);

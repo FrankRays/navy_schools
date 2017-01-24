@@ -27,6 +27,7 @@ class CreateCoursesTable extends Migration
             $table->string('duration');
             $table->date('start_date');
             $table->date('end_date');
+            $table->boolean('approval')->default(false);
 
             $table->timestamps();
 

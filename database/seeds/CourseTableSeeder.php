@@ -33,7 +33,8 @@ class CourseTableSeeder extends Seeder
 						'strength'	=>	50,
 						'duration'	=> '10 weeks',
 						'start_date'	=>	date("Y/m/d", strtotime("-2 Months")),
-						'end_date'	=>	date("Y-m-d", strtotime("+3 Months"))   
+						'end_date'	=>	date("Y-m-d", strtotime("+3 Months")),
+						'approval'	=>	true
 					]);
 
 
@@ -47,7 +48,8 @@ class CourseTableSeeder extends Seeder
 						'strength'	=>	50,
 						'duration'	=> '10 weeks',
 						'start_date'	=>	date("Y/m/d"),
-						'end_date'	=>	date("Y-m-d", strtotime("+3 Months"))   
+						'end_date'	=>	date("Y-m-d", strtotime("+3 Months")),
+						'approval'	=>	true
 					]);
 
 		Course::create([ 'name' => 'BRCC (L & R)',
@@ -60,7 +62,8 @@ class CourseTableSeeder extends Seeder
 						'strength'	=>	50,
 						'duration'	=> '10 weeks',
 						'start_date'	=>	date("Y/m/d"),
-						'end_date'	=>	date("Y-m-d", strtotime("+1 Months"))   
+						'end_date'	=>	date("Y-m-d", strtotime("+1 Months")),
+						'approval'	=>	false 
 					]);
 
 		Course::create([ 'name' => 'EA-IV ‘Q’',
@@ -73,7 +76,8 @@ class CourseTableSeeder extends Seeder
 						'strength'	=>	50,
 						'duration'	=> '10 weeks',
 						'start_date'	=>	date("Y/m/d"),
-						'end_date'	=>	date("Y-m-d", strtotime("+2 Months"))   
+						'end_date'	=>	date("Y-m-d", strtotime("+2 Months")),
+						'approval'	=>	false  
 					]);
 
     }

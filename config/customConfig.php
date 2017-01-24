@@ -2,7 +2,7 @@
 
 return [
     'names' =>[
-        'siteName' => 'NAVY Schools'
+        'siteName' => 'TRAINING WING, BNS SHAHEED MOAZZAM'
     ],
     'roles' =>[
         'admin' => 'Admin',

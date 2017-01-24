@@ -28,22 +28,39 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                    <table  id="dataTable" class="table table-striped table-bordered">
+                                    <table  id="dataTable" class="table table-bordered">
                                         <thead>
                                         <tr>
                                             <th>id</th>
                                             <th>Name</th>
                                             <th>Code</th>
+                                            <th>Approval</th>
                                             <th>#</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach ($classes as $demo)
-
+                                            
+                                            @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 10)
+                                            <tr class='danger'>
+                                            @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 20)
+                                            <tr class="warning">
+                                            @elseif($today >= $demo->start_date && $today <= $demo->end_date)
+                                            <tr class="success">
+                                            @else
                                             <tr>
+                                            @endif
                                                 <td>{!! $demo->id !!}</td>
                                                 <td>{!! $demo->name !!}</td>
                                                 <td>{!! $demo->code !!}</td>
+                                                @if($demo->approval)
+                                                    <td class="panel info">Approved</td>
+                                                @else
+                                                    <td class="panel danger">
+                                                        <a href="{!! route('school.course.approve',[$school_id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive" style="margin-right: 3px;">Approve
+                                                        </a>
+                                                    </td>
+                                                @endif
                                                 <td>
                                                   <a href="{!! route('school.course.show',[$school_id,$demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
                                                   <a href="{!! route('school.course.edit',[$school_id,$demo->id]) !!}" class="btn btn-success btn-xs btn-archive" href="#" style="margin-right: 3px;">Edit</a>
@@ -85,7 +102,10 @@
 
         $(document).ready(function() {
 
-            var table = $('#dataTable').dataTable();
+            var table = $('#dataTable').dataTable({
+                "aaSorting": [],
+                "order": [0,'desc']
+            });
 
             $('[data-toggle=confirmation]').confirmation({
               rootSelector: '[data-toggle=confirmation]',

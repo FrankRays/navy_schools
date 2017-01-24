@@ -32,6 +32,8 @@ class CreateClassesTable extends Migration
             $table->date('end_date');
             $table->timestamps();
 
+            $table->boolean('approval')->default(false);
+
             $table->foreign('school_id')
                 ->references('id')->on('schools')
                 ->onDelete('cascade');

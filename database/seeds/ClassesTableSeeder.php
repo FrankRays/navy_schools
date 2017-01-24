@@ -20,7 +20,8 @@ class ClassesTableSeeder extends Seeder
 						'strength'	=>	50,
 						'duration'	=> '10 weeks',
 						'start_date'	=>	date("Y/m/d", strtotime("-2 Months")),
-						'end_date'	=>	date("Y-m-d", strtotime("+3 Months"))   
+						'end_date'	=>	date("Y-m-d", strtotime("+3 Months")) ,
+						'approval'	=>	true  
 					]);
 
         Classes::create([ 'name' => 'Ag S Lt (X) Course',
@@ -36,7 +37,8 @@ class ClassesTableSeeder extends Seeder
 						'strength'	=>	50,
 						'duration'	=> '10 weeks',
 						'start_date'	=>	date("Y/m/d", strtotime("-2 Months")),
-						'end_date'	=>	date("Y-m-d", strtotime("+3 Months"))   
+						'end_date'	=>	date("Y-m-d", strtotime("+3 Months")),
+						'approval'	=>	false
 					]);
     }
 }

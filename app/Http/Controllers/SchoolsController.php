@@ -14,11 +14,7 @@ use App\Course;
 
 class SchoolsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $school = School::where('id',$id)
@@ -42,10 +38,14 @@ class SchoolsController extends Controller
 
     public function courseIndex($id)
     {
-        $courses = Course::where('school_id', $id)->get();
+        $courses = Course::where('school_id', $id)
+                            ->orderBy('created_at', 'DESC')
+                            ->get();
+
         return view('schools.courses.index')
                 ->with('title', 'Courses')
                 ->with('school_id', $id)
+                ->with('today', Carbon::now())
                 ->with('classes', $courses);
     }
 
@@ -197,6 +197,22 @@ class SchoolsController extends Controller
                 return redirect()->back()
                 ->withInput()
                 ->with('error','failed to delete course!');
+            }
+    }
+
+    public function approveCourse($school_id, $course_id){
+        
+        $course = Course::findOrFail($course_id);
+        
+        $course->approval = true;
+
+        if($course->save()){
+                return redirect()->back()
+                ->with('success', 'course apporved successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','course approval failed!');
             }
     }
 

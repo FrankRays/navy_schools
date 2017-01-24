@@ -29,23 +29,23 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Officer</b></td>
+                                                    <td><b>Course Officer</b></td>
                                                     <td>
                                                         {!! $course->officer !!}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Officer's Mobile</b></td>
+                                                    <td><b>Course Officer's Mobile</b></td>
                                                     <td>
                                                         {!! $course->officer_mobile !!}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Chief</b></td>
+                                                    <td><b>Course Chief</b></td>
                                                     <td class="ng-binding">{!! $course->chief !!}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Chief's mobile</b></td>
+                                                    <td><b>Course Chief's mobile</b></td>
                                                     <td class="ng-binding">{!! $course->chief_mobile !!}</td>
                                                 </tr>
                                                 <tr>

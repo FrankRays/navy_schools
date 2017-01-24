@@ -95,7 +95,9 @@
 
         $(document).ready(function() {
 
-            var table = $('#dataTable').dataTable();
+            var table = $('#dataTable').dataTable({
+                "aaSorting": []
+            });
 
             $('[data-toggle=confirmation]').confirmation({
               rootSelector: '[data-toggle=confirmation]',

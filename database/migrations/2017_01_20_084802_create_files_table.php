@@ -19,6 +19,8 @@ class CreateFilesTable extends Migration
             $table->string('type');
             $table->timestamps();
 
+            $table->boolean('approval')->default(false);
+
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
@@ -35,47 +37,3 @@ class CreateFilesTable extends Migration
         Schema::drop('files');
     }
 }
-
-
-File::create(
-          [ 
-            'user_id'   =>  1,
-            'file_path' =>  '/uploads/files/test.pdf',
-            'type'      =>  'tm'
-          ]
-        );
-        File::create(
-          [ 
-            'user_id'   =>  1,
-            'file_path' =>  '/uploads/files/test.pdf',
-            'type'      =>  'fo'
-          ]
-        );
-        File::create(
-          [ 
-            'user_id'   =>  1,
-            'file_path' =>  '/uploads/files/test.pdf',
-            'type'      =>  'ni'
-          ]
-        );
-        File::create(
-          [ 
-            'user_id'   =>  1,
-            'file_path' =>  '/uploads/files/test.pdf',
-            'type'      =>  'do'
-          ]
-        );
-        File::create(
-          [ 
-            'user_id'   =>  1,
-            'file_path' =>  '/uploads/files/test.pdf',
-            'type'      =>  'cor_in'
-          ]
-        );
-        File::create(
-          [ 
-            'user_id'   =>  1,
-            'file_path' =>  '/uploads/files/test.pdf',
-            'type'      =>  'cor_out'
-          ]
-        );

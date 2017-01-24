@@ -22,14 +22,14 @@
                         </a>
                     </div>
 
-                    <div class="col-lg-3 col-sm-6">
+                    <!-- <div class="col-lg-3 col-sm-6">
                         <a href="{!! route('school.course.awaiting', $school->id) !!}">
                             <div class="widget-panel widget-style-2 white-bg">
                                 <i class="ion-wifi text-purple"></i>
                                 <div>Awaiting Courses</div>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
 
                     <div class="col-lg-3 col-sm-6">
                         <a href="{!! route('school.course.archive', $school->id) !!}">

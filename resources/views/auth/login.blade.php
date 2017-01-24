@@ -8,7 +8,7 @@
 <div class="wrapper-page animated fadeInDown">
     <div class="panel panel-color panel-primary">
         <div class="panel-heading" style="background-color: #3ecc6f;">
-            <h3 class="text-center"><strong>Navy Schools</strong> </h3>
+            <h3 class="text-center"><strong>TRAINING WING, BNS SHAHEED MOAZZAM</strong> </h3>
         </div>
 
              @include('includes.alert')

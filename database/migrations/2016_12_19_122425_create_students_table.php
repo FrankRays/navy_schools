@@ -24,6 +24,9 @@ class CreateStudentsTable extends Migration
           $table->string('blood_group')->nullable();
           $table->string('barrack_location')->nullable();
           $table->timestamps();
+
+          //$table->boolean('approval')->default(false);
+          
       });
     }
 

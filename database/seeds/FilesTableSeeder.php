@@ -12,42 +12,48 @@ class FilesTableSeeder extends Seeder
 	      [ 
 	      	'user_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
-	      	'type'		=>	'tm'
+	      	'type'		=>	'tm',
+	      	'approval'	=>	false
 	      ]
     	);
     	File::create(
 	      [ 
 	      	'user_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
-	      	'type'		=>	'fo'
+	      	'type'		=>	'fo',
+	      	'approval'	=>	true
 	      ]
     	);
     	File::create(
 	      [ 
 	      	'user_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
-	      	'type'		=>	'ni'
+	      	'type'		=>	'ni',
+	      	'approval'	=>	true
 	      ]
     	);
     	File::create(
 	      [ 
 	      	'user_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
-	      	'type'		=>	'do'
+	      	'type'		=>	'do',
+	      	'approval'	=>	false
 	      ]
     	);
     	File::create(
 	      [ 
 	      	'user_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
-	      	'type'		=>	'cor_in'
+	      	'type'		=>	'cor_in',
+	      	'approval'	=>	false
 	      ]
     	);
     	File::create(
 	      [ 
 	      	'user_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
-	      	'type'		=>	'cor_out'
+	      	'type'		=>	'cor_out',
+	      	'approval'	=>	false
 	      ]
     	);
     }
