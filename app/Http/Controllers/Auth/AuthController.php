@@ -143,9 +143,21 @@ class AuthController extends Controller
     }
 
     public function dashboard(){
-        return view('dashboard')
+
+        $user = Auth::user();
+        //check user roles
+        if($user->hasRole('admin')){
+            return view('dashboard')
                     ->with('title','Dashboard')->with('user', Auth::user());
-        // return 'Dashboard';
+        }elseif ($user->hasRole('electrical') || $user->hasRole('electrical_editor')) {
+            return redirect()->route('school.show',1);
+        }elseif ($user->hasRole('engineering')||$user->hasRole('engineering_editor')) {
+            return redirect()->route('school.show',2);
+        }elseif ($user->hasRole('seamanship')||$user->hasRole('seamanship_editor')) {
+            return redirect()->route('school.show',3);
+        }else{
+            return "none";
+        }
     }
 
     public function changePassword(){

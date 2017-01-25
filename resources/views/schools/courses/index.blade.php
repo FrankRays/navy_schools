@@ -34,7 +34,12 @@
                                             <th>id</th>
                                             <th>Name</th>
                                             <th>Code</th>
+                                            @if($hasRight = Auth::user()->hasRole('admin')||
+                                                Auth::user()->hasRole('electrical')||
+                                                Auth::user()->hasRole('engineering')||
+                                                Auth::user()->hasRole('seamanship'))
                                             <th>Approval</th>
+                                            @endif
                                             <th>#</th>
                                         </tr>
                                         </thead>
@@ -53,6 +58,7 @@
                                                 <td>{!! $demo->id !!}</td>
                                                 <td>{!! $demo->name !!}</td>
                                                 <td>{!! $demo->code !!}</td>
+                                                @if($hasRight)
                                                 @if($demo->approval)
                                                     <td class="panel info">Approved</td>
                                                 @else
@@ -60,6 +66,7 @@
                                                         <a href="{!! route('school.course.approve',[$school_id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive" style="margin-right: 3px;">Approve
                                                         </a>
                                                     </td>
+                                                @endif
                                                 @endif
                                                 <td>
                                                   <a href="{!! route('school.course.show',[$school_id,$demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
