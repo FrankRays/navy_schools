@@ -94,6 +94,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	//course appoval
 	Route::get('school/{school_id}/course/approve/{course_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.course.approve', 'uses' => 'SchoolsController@approveCourse']);
 	
+	//school syllabus
+	Route::get('school/{id}/syllabus',['as' => 'school.syllabus', 'uses' => 'FilesController@showSyllabus']);
+
 	//school classes
 	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'SchoolsController@classIndex']);
 });

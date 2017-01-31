@@ -30,19 +30,19 @@
                             <li><a href="{{ route('school.show',3) }}"> Seamanship School</a></li>
                         </ul>
                     </li>
-                    @endif
 
 
                     <li class="has-submenu"><a href="#"><i class="fa fa-user"></i> <span class="nav-label">Admin Panel</span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{!! route('student.index') !!}"> Students</a></li>
-                            <li><a href="{!! route('student.index') !!}"> Staffs</a></li>
+                            <li><a href="#"> Staffs</a></li>
                             <li><a href="{!! route('foni') !!}"> FO/NI</a></li>
                             <li><a href="#"> Special Instructions</a></li>
+                            <li><a href="#"> Correspondences</a></li>
 
                         </ul>
                     </li>
 
+                    @endif
                 </ul>
             </nav>
 

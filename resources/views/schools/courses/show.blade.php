@@ -10,8 +10,12 @@
                     <div class="col-sm-12">
                         <div class="panel panel-default p-0">
                             <div class="panel-body p-0">
+                            @include('includes.alert')
                                 <ul class="nav nav-tabs profile-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#aboutme">{!! $title !!}</a></li>
+                                    <li class="active"><a>{!! $title !!}</a></li>
+                                    @if(!$course->approval)
+                                    <li class="pull-right btn btn-success btn-xs"><a href="{!! route('school.course.approve',[$school_id, $course->id]) !!}"><i class="fa fa-save"></i>Draft</a></li>
+                                    @endif
                                 </ul>
 
                                 <div class="tab-content m-0">
@@ -28,30 +32,40 @@
                                                         {!! $course->name !!} {!! $course->code !!}
                                                     </td>
                                                 </tr>
+                                                @if($course->officer)
                                                 <tr>
                                                     <td><b>Course Officer</b></td>
                                                     <td>
                                                         {!! $course->officer !!}
                                                     </td>
                                                 </tr>
+                                                @endif
+                                                @if($course->officer_mobile)
                                                 <tr>
-                                                    <td><b>Course Officer's Mobile</b></td>
+                                                    <td><b>Course officer's contact number</b></td>
                                                     <td>
                                                         {!! $course->officer_mobile !!}
                                                     </td>
                                                 </tr>
+                                                @endif
+                                                @if($course->chief)
                                                 <tr>
                                                     <td><b>Course Chief</b></td>
                                                     <td class="ng-binding">{!! $course->chief !!}</td>
                                                 </tr>
+                                                @endif
+                                                @if($course->chief_mobile)
                                                 <tr>
-                                                    <td><b>Course Chief's mobile</b></td>
+                                                    <td><b>Course chief's contact number</b></td>
                                                     <td class="ng-binding">{!! $course->chief_mobile !!}</td>
                                                 </tr>
+                                                @endif
+                                                @if($course->strength > 0)
                                                 <tr>
                                                     <td><b>Strength</b></td>
                                                     <td class="ng-binding">{!! $course->strength !!}</td>
                                                 </tr>
+                                                @endif
                                                 <tr>
                                                     <td><b>Duration</b></td>
                                                     <td class="ng-binding">{!! $course->duration !!} weeks</td>
@@ -61,7 +75,7 @@
                                                     <td class="ng-binding">{!! Carbon\Carbon::parse($course->start_date)->format('d/m/Y') !!}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>End Date</b></td>
+                                                    <td><b>Termination Date</b></td>
                                                     <td class="ng-binding">{!! Carbon\Carbon::parse($course->end_date)->format('d/m/Y') !!}</td>
                                                 </tr>
 

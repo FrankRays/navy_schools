@@ -35,45 +35,45 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('code', "Code", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('code', "Batch", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('code', null, array('class' => 'form-control', 'placeholder' => 'Course code', 'required' => 'required')) !!}
+                                        {!! Form::text('code', null, array('class' => 'form-control', 'placeholder' => 'Course batch', 'required' => 'required')) !!}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     {!! Form::label('officer', "Course Officer's Name", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('officer', null, array('class' => 'form-control','placeholder' => 'officer name', 'required')) !!}
+                                        {!! Form::text('officer', null, array('class' => 'form-control','placeholder' => 'officer name')) !!}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('officer_mobile', "Course Officer's mobile", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('officer_mobile', "Course Officer's contact number", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('officer_mobile', null, array('class' => 'form-control','placeholder' => 'officer mobile', 'required')) !!}
+                                        {!! Form::text('officer_mobile', null, array('class' => 'form-control','placeholder' => 'officer mobile')) !!}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     {!! Form::label('chief', "Course Chief's Name", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('chief', null, array('class' => 'form-control','placeholder' => 'Chief name','required')) !!}
+                                        {!! Form::text('chief', null, array('class' => 'form-control','placeholder' => 'Chief name')) !!}
                                     </div>
                                 </div>
 
 
                                 <div class="form-group">
-                                    {!! Form::label('chief_mobile', "Course Chief's Mobile", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('chief_mobile', "Course Chief's contact number", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('chief_mobile', null, array('class' => 'form-control','placeholder' => 'Chief Mobile','required')) !!}
+                                        {!! Form::text('chief_mobile', null, array('class' => 'form-control','placeholder' => 'Chief Mobile')) !!}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     {!! Form::label('strength', "Strength", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('strength', null, array('class' => 'form-control','placeholder' => 'Strength', 'required')) !!}
+                                        {!! Form::text('strength', null, array('class' => 'form-control','placeholder' => 'Strength')) !!}
                                     </div>
                                 </div>
 
@@ -92,7 +92,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('end_date', "End Date", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('end_date', "Termination Date", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
                                         {!! Form::date('end_date', null, array('class' => 'form-control','placeholder' => 'select a date', 'required')) !!}
                                     </div>

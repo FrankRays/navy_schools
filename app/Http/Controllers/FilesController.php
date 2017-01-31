@@ -19,6 +19,12 @@ class FilesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function showSyllabus($school_id){
+        
+    }
+    
     public function foni()
     {
         $fo = File::where('type','fo')

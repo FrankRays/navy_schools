@@ -12,8 +12,10 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-      Schema::create('students', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
           $table->increments('id');
+          $table->integer('school_id')->unsigned();
+          $table->integer('class_id')->unsigned();
           $table->string('name');
           $table->string('email')->unique();
           $table->string('photo_url')->nullable();
@@ -25,8 +27,13 @@ class CreateStudentsTable extends Migration
           $table->string('barrack_location')->nullable();
           $table->timestamps();
 
-          //$table->boolean('approval')->default(false);
-          
+          $table->foreign('school_id')
+                ->references('id')->on('schools')
+                ->onDelete('cascade');
+
+          $table->foreign('class_id')
+                ->references('id')->on('classes')
+                ->onDelete('cascade');
       });
     }
 

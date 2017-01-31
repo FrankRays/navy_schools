@@ -31,7 +31,7 @@
                                     <table  id="dataTable" class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>id</th>
+                                            <th>Serial</th>
                                             <th>Name</th>
                                             <th>Code</th>
                                             <th>Starting Date</th>
@@ -40,7 +40,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($courses as $demo)
+                                        @foreach ($courses as $indx => $demo)
 
 
                                             
@@ -49,7 +49,7 @@
                                             @else
                                             <tr>
                                             @endif
-                                                <td>{!! $demo->id !!}</td>
+                                                <td>{!! $indx+1 !!}</td>
                                                 <td>{!! $demo->name !!}</td>
                                                 <td>{!! $demo->code !!}</td>
                                                 <td>{!! Carbon\Carbon::parse($demo->start_date)->format('d/m/Y') !!}</td>

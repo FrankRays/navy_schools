@@ -39,7 +39,7 @@ class SchoolsController extends Controller
     public function courseIndex($id)
     {
         $courses = Course::where('school_id', $id)
-                            ->orderBy('created_at', 'DESC')
+                            ->orderBy('id', 'DESC')
                             ->get();
 
         return view('schools.courses.index')
@@ -140,11 +140,11 @@ class SchoolsController extends Controller
         $rules =[
             'name'          =>  'required',
             'code'          =>  'required',
-            'officer'       =>  'required',
-            'officer_mobile'=>  'required',
-            'chief'         =>  'required',
-            'chief_mobile'  =>  'required',
-            'strength'      =>  'required',
+            // 'officer'       =>  'required',
+            // 'officer_mobile'=>  'required',
+            // 'chief'         =>  'required',
+            // 'chief_mobile'  =>  'required',
+            // 'strength'      =>  'required',
             'duration'      =>  'required',
             'start_date'    =>  'required',
             'end_date'      =>  'required'
@@ -166,11 +166,11 @@ class SchoolsController extends Controller
             $course->school_id = $school_id;
             $course->name = $data['name'];
             $course->code = $data['code'];
-            $course->officer = $data['officer'];
-            $course->officer_mobile = $data['officer_mobile'];
-            $course->chief = $data['chief'];
-            $course->chief_mobile = $data['chief_mobile'];
-            $course->strength = $data['strength'];
+            $course->officer = isset($data['officer']) ? $data['officer'] : null;
+            $course->officer_mobile = isset($data['officer_mobile']) ? $data['officer_mobile'] : null;
+            $course->chief = isset($data['chief']) ? $data['chief'] : null;
+            $course->chief_mobile = isset($data['chief_mobile']) ? $data['chief_mobile'] : null;
+            $course->strength = isset($data['strength']) ? $data['strength'] : null;
             $course->duration = $data['duration'];
             $course->start_date = $data['start_date'];
             $course->end_date = $data['end_date'];
@@ -240,11 +240,11 @@ class SchoolsController extends Controller
         $rules =[
             'name'          =>  'required',
             'code'          =>  'required',
-            'officer'       =>  'required',
-            'officer_mobile'=>  'required',
-            'chief'         =>  'required',
-            'chief_mobile'  =>  'required',
-            'strength'      =>  'required',
+            // 'officer'       =>  'required',
+            // 'officer_mobile'=>  'required',
+            // 'chief'         =>  'required',
+            // 'chief_mobile'  =>  'required',
+            // 'strength'      =>  'required',
             'duration'      =>  'required',
             'start_date'    =>  'required',
             'end_date'      =>  'required'
@@ -267,11 +267,11 @@ class SchoolsController extends Controller
             $course->school_id = $school_id;
             $course->name = $data['name'];
             $course->code = $data['code'];
-            $course->officer = $data['officer'];
-            $course->officer_mobile = $data['officer_mobile'];
-            $course->chief = $data['chief'];
-            $course->chief_mobile = $data['chief_mobile'];
-            $course->strength = $data['strength'];
+            $course->officer = isset($data['officer']) ? $data['officer'] : null;
+            $course->officer_mobile = isset($data['officer_mobile']) ? $data['officer_mobile'] : null;
+            $course->chief = isset($data['chief']) ? $data['chief'] : null;
+            $course->chief_mobile = isset($data['chief_mobile']) ? $data['chief_mobile'] : null;
+            $course->strength = isset($data['strength']) ? $data['strength'] : null;
             $course->duration = $data['duration'];
             $course->start_date = $data['start_date'];
             $course->end_date = $data['end_date'];

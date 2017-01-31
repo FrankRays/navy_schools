@@ -31,39 +31,39 @@
                                     <table  id="dataTable" class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>id</th>
+                                            <th>Serial</th>
                                             <th>Name</th>
-                                            <th>Code</th>
+                                            <th>Batch</th>
                                             @if($hasRight = Auth::user()->hasRole('admin')||
                                                 Auth::user()->hasRole('electrical')||
                                                 Auth::user()->hasRole('engineering')||
                                                 Auth::user()->hasRole('seamanship'))
-                                            <th>Approval</th>
+                                            <th>Verification</th>
                                             @endif
                                             <th>#</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($classes as $demo)
+                                        @foreach ($classes as $indx => $demo)
                                             
-                                            @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 10)
+                                            @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 10 && $today < $demo->start_date)
                                             <tr class='danger'>
-                                            @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 20)
+                                            @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 20 && $today < $demo->start_date)
                                             <tr class="warning">
                                             @elseif($today >= $demo->start_date && $today <= $demo->end_date)
                                             <tr class="success">
                                             @else
                                             <tr>
                                             @endif
-                                                <td>{!! $demo->id !!}</td>
+                                                <td>{!! $indx+1  !!}</td>
                                                 <td>{!! $demo->name !!}</td>
                                                 <td>{!! $demo->code !!}</td>
                                                 @if($hasRight)
                                                 @if($demo->approval)
-                                                    <td class="panel info">Approved</td>
+                                                    <td class="panel info">verified</td>
                                                 @else
                                                     <td class="panel danger">
-                                                        <a href="{!! route('school.course.approve',[$school_id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive" style="margin-right: 3px;">Approve
+                                                        <a href="{!! route('school.course.approve',[$school_id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive" style="margin-right: 3px;">Draft
                                                         </a>
                                                     </td>
                                                 @endif
@@ -111,7 +111,7 @@
 
             var table = $('#dataTable').dataTable({
                 "aaSorting": [],
-                "order": [0,'desc']
+                "order": []
             });
 
             $('[data-toggle=confirmation]').confirmation({

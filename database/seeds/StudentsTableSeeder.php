@@ -14,6 +14,8 @@ class StudentsTableSeeder extends Seeder
     {
       Student::create(
       [ 'name' => 'student-1',
+        'school_id' =>  1,
+        'class_id'  =>  1,
         'email' => 'student1@mail.com',
         'photo_url'  =>  '/uploads/students/test.jpg',
         'serial_number' =>  12345,

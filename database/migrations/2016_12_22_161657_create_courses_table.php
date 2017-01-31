@@ -18,12 +18,12 @@ class CreateCoursesTable extends Migration
             $table->integer('school_id')->unsigned();
             $table->string('name');
             $table->string('code');
-            $table->string('officer');
-            $table->string('officer_mobile');
-            $table->string('chief');
-            $table->string('chief_mobile');
+            $table->string('officer')->nullable();
+            $table->string('officer_mobile')->nullable();
+            $table->string('chief')->nullable();
+            $table->string('chief_mobile')->nullable();
 
-            $table->integer('strength');
+            $table->integer('strength')->nullable();
             $table->string('duration');
             $table->date('start_date');
             $table->date('end_date');
