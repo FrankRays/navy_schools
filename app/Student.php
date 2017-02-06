@@ -9,4 +9,8 @@ class Student extends Model
     protected $fillable = [ 'name', 'email', 'photo_url', 'mobile',
                             'barrack_location', 'blood_group', 'serial_number',
                             'po_number', 'rank'];
+
+    public function students(){
+    	return $this->belongsTo('App\Classes', 'class_id', 'id');
+    }
 }

@@ -9,7 +9,7 @@
                 <a href="" class="btn btn-lg btn-info">Admin of School</a>
                 <a href="{!! route('school.course.index', $school->id) !!}" class="btn btn-lg btn-info">All Courses</a>
                 <a href="{!! route('school.course.ongoing', $school->id) !!}" class="btn btn-lg btn-info">Ongoing Courses</a>
-                <a href="" class="btn btn-lg btn-info">Classes</a>
+                <a href="{!! route('school.class.index', $school->id) !!}" class="btn btn-lg btn-info">Classes</a>
                 <a href="" class="btn btn-lg btn-info">Laboratories</a>
                 <a href="{!! route('school.course.archive', $school->id) !!}" class="btn btn-lg btn-info">Archive</a>
 

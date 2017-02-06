@@ -19,7 +19,7 @@
                                 <div class="col-md-6">
                                      <a class="pull-right" 
                                         href="{{ route('school.class.create', $school_id) }}">
-                                        <button class="btn btn-success">Add Class</button>
+                                        <button class="btn btn-success">Add Student</button>
                                     </a>
                                 </div>
                             </div>
@@ -32,34 +32,18 @@
                                         <thead>
                                         <tr>
                                             <th>Serial</th>
+                                            <th>Photo</th>
                                             <th>Name</th>
-                                            <th>Batch</th>
-                                            @if($hasRight = Auth::user()->hasRole('admin')||
-                                                Auth::user()->hasRole('electrical')||
-                                                Auth::user()->hasRole('engineering')||
-                                                Auth::user()->hasRole('seamanship'))
-                                            <th>Verification</th>
-                                            @endif
                                             <th>#</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($classes as $indx => $demo)
+                                        @foreach ($class->students as $indx => $demo)
                                             
                                             <tr>
                                                 <td>{!! $indx+1  !!}</td>
+                                                <td>{!! Html::image($demo->photo_url, $demo->name, array('class' => 'thumb', 'height' => '100%')) !!}</td>
                                                 <td>{!! $demo->name !!}</td>
-                                                <td>{!! $demo->code !!}</td>
-                                                @if($hasRight)
-                                                @if($demo->approval)
-                                                    <td class="panel info">verified</td>
-                                                @else
-                                                    <td class="panel danger">
-                                                        <a href="{!! route('school.class.approve',[$school_id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive" style="margin-right: 3px;">Draft
-                                                        </a>
-                                                    </td>
-                                                @endif
-                                                @endif
                                                 <td>
                                                   <a href="{!! route('school.class.show',[$school_id,$demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
                                                   <a href="{!! route('school.class.edit',[$school_id,$demo->id]) !!}" class="btn btn-success btn-xs btn-archive" href="#" style="margin-right: 3px;">Edit</a>

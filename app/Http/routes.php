@@ -58,14 +58,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 
 	//special instructions
 
-	// Demo CRUD
-	Route::get('demo',['as' => 'demo.index', 'uses' => 'DemoController@index']);
-	Route::get('demo/create',['as' => 'demo.create', 'uses' => 'DemoController@create']);
-	Route::post('demo',['as' => 'demo.store', 'uses' => 'DemoController@store']);
-	Route::get('demo/{id}/edit',['as' => 'demo.edit', 'uses' => 'DemoController@edit']);
-	Route::get('demo/{id}/show',['as' => 'demo.show', 'uses' => 'DemoController@show']);
-	Route::put('demo/{id}',['as' => 'demo.update', 'uses' => 'DemoController@update']);
-	Route::get('demo/delete/{id}',['as' => 'demo.delete', 'uses' => 'DemoController@destroy']);
+	// // Demo CRUD
+	// Route::get('demo',['as' => 'demo.index', 'uses' => 'DemoController@index']);
+	// Route::get('demo/create',['as' => 'demo.create', 'uses' => 'DemoController@create']);
+	// Route::post('demo',['as' => 'demo.store', 'uses' => 'DemoController@store']);
+	// Route::get('demo/{id}/edit',['as' => 'demo.edit', 'uses' => 'DemoController@edit']);
+	// Route::get('demo/{id}/show',['as' => 'demo.show', 'uses' => 'DemoController@show']);
+	// Route::put('demo/{id}',['as' => 'demo.update', 'uses' => 'DemoController@update']);
+	// Route::get('demo/delete/{id}',['as' => 'demo.delete', 'uses' => 'DemoController@destroy']);
 
 	// Student CRUD
 	Route::get('student',['as' => 'student.index', 'uses' => 'StudentsController@index']);
@@ -98,7 +98,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{id}/syllabus',['as' => 'school.syllabus', 'uses' => 'FilesController@showSyllabus']);
 
 	//school classes
-	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'SchoolsController@classIndex']);
+	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'ClassesController@index']);
+	Route::get('school/{id}/class/create',['as' => 'school.class.create', 'uses' => 'ClassesController@create']);
+	Route::post('school/{id}/class/create',['as' => 'school.class.store', 'uses' => 'ClassesController@store']);
+	Route::get('school/{school_id}/class/show/{class_id}',['as' => 'school.class.show', 'uses' => 'ClassesController@show']);
+	Route::get('school/{school_id}/class/students/{class_id}',['as' => 'school.class.students', 'uses' => 'ClassesController@students']);
+	Route::get('school/{school_id}/class/result/{class_id}',['as' => 'school.class.result', 'uses' => 'ClassesController@result']);
+	Route::get('school/{school_id}/class/edit/{class_id}',['as' => 'school.class.edit', 'uses' => 'ClassesController@edit']);
+	Route::put('school/{school_id}/class/update/{class_id}',['as' => 'school.class.update', 'uses' => 'ClassesController@update']);
+	Route::get('school/{school_id}/class/delete/{class_id}',['as' => 'school.class.delete', 'uses' => 'ClassesController@destroy']);
+	//course appoval
+	Route::get('school/{school_id}/class/approve/{class_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.class.approve', 'uses' => 'ClassesController@approve']);
 });
 
 /* // Language CRUD

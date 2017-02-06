@@ -211,7 +211,6 @@ class SchoolsController extends Controller
                 ->with('success', 'course apporved successfully');
             }else{
                 return redirect()->back()
-                ->withInput()
                 ->with('error','course approval failed!');
             }
     }

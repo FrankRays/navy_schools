@@ -19,9 +19,6 @@
                      <li class="{!! Menu::isActiveRoute('dashboard') !!}"><a href="{{ route('dashboard') }}"><i class="ion-flask"></i> <span class="nav-label">Dashboard</span></a>                 
                     </li>
 
-
-                    <!-- <li class="{!! Menu::isActiveRoute('demo.index') !!}"><a href="{{ route('demo.index') }}"><i class="ion-compose"></i> <span class="nav-label">Demo (modal) CRUD</span></a>                      
-                    </li> -->
                     @if(Auth::user()->hasRole('admin'))
                     <li class="has-submenu"><a href="#"><i class="ion-grid"></i> <span class="nav-label">Schools</span></a>
                         <ul class="list-unstyled">

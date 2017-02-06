@@ -17,4 +17,8 @@ class Classes extends Model
     public function course(){
     	return $this->belongsTo('App\Course', 'course_id', 'id');
     }
+
+    public function students(){
+    	return $this->hasMany('App\Student', 'class_id', 'id');
+    }
 }
