@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\School;
 use App\Classes;
 use App\Course;
+use App\CourseFile;
 
 class SchoolsController extends Controller
 {
@@ -115,6 +116,123 @@ class SchoolsController extends Controller
 
     }
 
+    public function courseSyllabus($school_id, $course_id, Request $request)
+    {
+        
+        $rules =[
+            'file_path' =>  'required'
+        ];
+
+        $data = $request->all();
+
+        $validation = Validator::make($data,$rules);
+
+        if($validation->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validation);
+        }else{
+
+            //check any file already exists
+            $thisfile = CourseFile::where('course_id', $course_id)
+                                ->where('type', 'syllabus')
+                                ->first();
+
+            if(!$thisfile){
+                $thisfile = new CourseFile();
+            }
+
+            if($request->hasFile('file_path')) {
+                $file = \Input::file('file_path');
+                //getting timestamp
+                $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+
+                $name = $timestamp. '-' .$file->getClientOriginalName();
+
+                
+                $file->move(public_path().'/uploads/files', $name);
+
+                $thisfile->file_path = '/uploads/files/'.$name;
+            }else{
+
+                return redirect()->back()
+                ->withInput()
+                ->with('error','file upload failed!');
+            }
+            
+            $thisfile->course_id = $course_id;
+            $thisfile->type = "syllabus";
+            
+            if($thisfile->save()){
+                return redirect()->back()
+                ->with('success', 'file saved successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to save file!');
+            }
+        }
+    }
+
+    public function courseSI($school_id, $course_id, Request $request)
+    {
+        
+        $rules =[
+            'file_path' =>  'required'
+        ];
+
+        $data = $request->all();
+
+        $validation = Validator::make($data,$rules);
+
+        if($validation->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validation);
+        }else{
+            //check any file already exists
+            $thisfile = CourseFile::where('course_id', $course_id)
+                                ->where('type', 'si')
+                                ->first();
+
+            if(!$thisfile){
+                $thisfile = new CourseFile();
+            }
+
+            $thisfile = new CourseFile();
+
+            if($request->hasFile('file_path')) {
+                $file = \Input::file('file_path');
+                //getting timestamp
+                $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+
+                $name = $timestamp. '-' .$file->getClientOriginalName();
+
+                
+                $file->move(public_path().'/uploads/files', $name);
+
+                $thisfile->file_path = '/uploads/files/'.$name;
+            }else{
+
+                return redirect()->back()
+                ->withInput()
+                ->with('error','file upload failed!');
+            }
+            
+            $thisfile->course_id = $course_id;
+            $thisfile->type = "si";
+            
+            if($thisfile->save()){
+                return redirect()->back()
+                ->with('success', 'file saved successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to save file!');
+            }
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -217,9 +335,13 @@ class SchoolsController extends Controller
 
     public function showCourse($school_id, $course_id)
     {
-        $course = Course::findOrFail($course_id);
+        $course = Course::where('id', $course_id)->with('files')->first();
+        $syllabus = $course->files->where('type','syllabus')->first();
+        $si = $course->files->where('type','si')->first();
         return view('schools.courses.show')
                 ->with('title', $course->name.' '.$course->code)
+                ->with('si', $si)
+                ->with('syllabus', $syllabus)
                 ->with('course', $course)
                 ->with('school_id', $school_id);
     }

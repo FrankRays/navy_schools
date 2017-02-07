@@ -15,4 +15,8 @@ class Course extends Model
     public function classes(){
     	return $this->hasMany('App\Classes', 'course_id', 'id');
     }
+
+    public function files(){
+    	return $this->hasMany('App\CourseFile', 'course_id', 'id');	
+    }
 }

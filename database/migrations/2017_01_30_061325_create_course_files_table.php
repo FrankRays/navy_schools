@@ -14,18 +14,13 @@ class CreateCourseFilesTable extends Migration
     {
         Schema::create('course_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('school_id')->unsigned();
-            $table->integer('class_id')->unsigned();
+            $table->integer('course_id')->unsigned();
             $table->string('file_path');
             $table->string('type');
             $table->timestamps();
 
-            $table->foreign('school_id')
-                ->references('id')->on('schools')
-                ->onDelete('cascade');
-
-            $table->foreign('class_id')
-                ->references('id')->on('classes')
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
                 ->onDelete('cascade');
         });
     }

@@ -14,6 +14,13 @@ use App\Course;
 
 class ClassesController extends Controller
 {
+
+    public function checkClass(){
+        
+        $school = new School();
+        $school->name = "cron test";
+        $school->save();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +35,7 @@ class ClassesController extends Controller
                 ->with('today', Carbon::now())
                 ->with('classes', $classes);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -62,7 +70,10 @@ class ClassesController extends Controller
      */
     public function show($school_id, $class_id)
     {
-        $class = Classes::where('id',$class_id)->with('students')->first();
+        $class = Classes::where('id',$class_id)
+                        //->with('files')
+                        ->with('students')
+                        ->first();
         return view('schools.classes.show')
                 ->with('title', $class->name.' '.$class->code)
                 ->with('class', $class)

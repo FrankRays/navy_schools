@@ -22,7 +22,8 @@
 
                                     <div id="aboutme" class="tab-pane active">
                                     <div class="profile-desk">
-                                
+                                        <div class="col-md-6">
+                                            
                                         <table class="table table-condensed">
                                             <tbody>
 
@@ -79,16 +80,92 @@
                                                     <td class="ng-binding">{!! Carbon\Carbon::parse($course->end_date)->format('d/m/Y') !!}</td>
                                                 </tr>
 
+                                                <tr>
+                                                    <td>
+                                                    <a href="{!! route('school.course.edit',[$school_id,$course->id]) !!}" class="btn btn-success btn-xs btn-archive" href="#" style="margin-right: 3px;">Edit</a>
+                                                
+                                                    <a href="{!! route('school.course.delete',[$school_id,$course->id]) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
+                                                    </td>
+                                                </tr>
+
 
                                             </tbody>
                                         </table>
+                                        
+                                        </div>
+                                        <div class="col-md-6">
+                                            
+                                            <div class="row">
+                                                <div class="panel">
+                                                    <h4>Syllabus</h4>
+                                                    <div class="row">
+                                                    @if($syllabus)
+                                                    <div class="col-md-6">
+                                                        <a href="{!! $syllabus->file_path !!}"><i class="fa fa-4x fa-file"></i> Watch File</a>
+                                                    
+                                                    </div>
+                                                    @endif
+                                                    <div class="col-md-6"> 
+
+                                                    {!! Form::open(array('route' => ['school.course.syllabus.store',$school_id, $course->id] , 'method' => 'post', 'class' => 'cmxform form-horizontal tasi-form', 'files' => true)) !!}
+
+
+                                                     <div class="form-group">
+                                                        <div class="col-lg-6">
+                                                            {!! Form::file('file_path', null, array('class' => 'form-control', 'placeholder' => 'upload file', 'required')) !!}
+                                                        </div>
+                                                    </div>
+                                                   
+
+                                                    <div class="form-group">
+                                                        <div class="col-lg-offset-2 col-lg-6">
+                                                        {!! Form::submit('Update/Add File', array('class' => 'btn btn-success btn-xs')) !!}
+                                                        </div>
+                                                    </div>
+
+                                                    {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="panel">
+                                                    <h4>Special Instructions</h4>
+                                                    <div class="row">
+                                                    @if($si)
+                                                    <div class="col-md-6">
+                                                        <a href="{!! $si->file_path !!}"><i class="fa fa-4x fa-file"></i> Watch File</a>
+                                                    
+                                                    </div>
+                                                    @endif
+                                                    <div class="col-md-6"> 
+
+                                                    {!! Form::open(array('route' => ['school.course.si.store',$school_id, $course->id] , 'method' => 'post', 'class' => 'cmxform form-horizontal tasi-form', 'files' => true)) !!}
+
+
+                                                     <div class="form-group">
+                                                        <div class="col-lg-6">
+                                                            {!! Form::file('file_path', null, array('class' => 'form-control', 'placeholder' => 'upload file', 'required')) !!}
+                                                        </div>
+                                                    </div>
+                                                   
+
+                                                    <div class="form-group">
+                                                        <div class="col-lg-offset-2 col-lg-6">
+                                                        {!! Form::submit('Update/Add File', array('class' => 'btn btn-success btn-xs')) !!}
+                                                        </div>
+                                                    </div>
+
+                                                    {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div> <!-- end profile-desk -->
                                 </div> <!-- about-me -->
-
-                                <div class="panel-footer">
-                                    <a href="{!! route('school.course.edit',[$school_id,$course->id]) !!}" class="btn btn-success btn-xs btn-archive" href="#" style="margin-right: 3px;">Edit</a>
-                                    <a href="{!! route('school.course.delete',[$school_id,$course->id]) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a></td>
-                                </div>
                             </div>
 
                         </div>

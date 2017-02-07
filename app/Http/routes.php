@@ -94,8 +94,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	//course appoval
 	Route::get('school/{school_id}/course/approve/{course_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.course.approve', 'uses' => 'SchoolsController@approveCourse']);
 	
-	//school syllabus
-	Route::get('school/{id}/syllabus',['as' => 'school.syllabus', 'uses' => 'FilesController@showSyllabus']);
+	//course syllabus
+	Route::post('school/{school_id}/course/{course_id}/syllabus',['as' => 'school.course.syllabus.store', 'uses' => 'SchoolsController@courseSyllabus']);
+	//course special instruction
+	Route::post('school/{school_id}/course/{course_id}/si',['as' => 'school.course.si.store', 'uses' => 'SchoolsController@courseSI']);
 
 	//school classes
 	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'ClassesController@index']);
@@ -107,7 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/class/edit/{class_id}',['as' => 'school.class.edit', 'uses' => 'ClassesController@edit']);
 	Route::put('school/{school_id}/class/update/{class_id}',['as' => 'school.class.update', 'uses' => 'ClassesController@update']);
 	Route::get('school/{school_id}/class/delete/{class_id}',['as' => 'school.class.delete', 'uses' => 'ClassesController@destroy']);
-	//course appoval
+	//class appoval
 	Route::get('school/{school_id}/class/approve/{class_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.class.approve', 'uses' => 'ClassesController@approve']);
 });
 
