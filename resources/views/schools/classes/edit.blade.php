@@ -16,7 +16,7 @@
                                     <h4>{{ $title }}</h4>
                             </div>
                             <div class="col-md-6">                            
-                                <a class="pull-right" href="{!! route('school.course.index',$school_id) !!}"><button class="btn btn-success">Back</button></a>
+                                <a class="pull-right" href="{!! route('school.class.index',$school_id) !!}"><button class="btn btn-success">Back</button></a>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                                 
                             <div class=" form"> 
 
-                                {!! Form::model($course, array('route' => ['school.course.update', $school_id, $course->id] , 'method' => 'put', 'class' => 'cmxform form-horizontal tasi-form', 'files' => true)) !!}
+                                {!! Form::model($class, array('route' => ['school.class.update', $school_id, $class->id] , 'method' => 'put', 'class' => 'cmxform form-horizontal tasi-form', 'files' => true)) !!}
 
 
                                 <div class="form-group">
@@ -67,6 +67,21 @@
                                     {!! Form::label('chief_mobile', "Course Chief's contact number", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
                                         {!! Form::text('chief_mobile', null, array('class' => 'form-control','placeholder' => 'Chief Mobile')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    {!! Form::label('instructor', "Course Instructor's Name", array('class' => 'control-label col-lg-2')) !!}
+                                    <div class="col-lg-6">
+                                        {!! Form::text('instructor', null, array('class' => 'form-control','placeholder' => 'Instructor name')) !!}
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    {!! Form::label('instructor_mobile', "Course Instructor's contact number", array('class' => 'control-label col-lg-2')) !!}
+                                    <div class="col-lg-6">
+                                        {!! Form::text('instructor_mobile', null, array('class' => 'form-control','placeholder' => 'Instructor Mobile')) !!}
                                     </div>
                                 </div>
 

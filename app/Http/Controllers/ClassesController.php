@@ -149,9 +149,14 @@ class ClassesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($school_id, $class_id)
     {
-        //
+        $class = Classes::findOrFail($class_id);
+
+        return view('schools.classes.edit')
+                ->with('title', 'Update Class')
+                ->with('class', $class)
+                ->with('school_id', $school_id);
     }
 
     /**
@@ -161,9 +166,55 @@ class ClassesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($school_id, $class_id, Request $request)
     {
-        //
+        $rules =[
+            'name'          =>  'required',
+            'code'          =>  'required',
+            // 'officer'       =>  'required',
+            // 'officer_mobile'=>  'required',
+            // 'chief'         =>  'required',
+            // 'chief_mobile'  =>  'required',
+            // 'strength'      =>  'required',
+            'duration'      =>  'required',
+            'start_date'    =>  'required',
+            'end_date'      =>  'required'
+        ];
+
+        $data = $request->all();
+
+        $validation = Validator::make($data,$rules);
+
+        if($validation->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validation);
+        }else{
+                        
+            $class = Classes::findOrFail($class_id);
+
+            $class->name = $data['name'];
+            $class->code = $data['code'];
+            $class->officer = isset($data['officer']) ? $data['officer'] : null;
+            $class->officer_mobile = isset($data['officer_mobile']) ? $data['officer_mobile'] : null;
+            $class->chief = isset($data['chief']) ? $data['chief'] : null;
+            $class->chief_mobile = isset($data['chief_mobile']) ? $data['chief_mobile'] : null;
+            $class->instructor = isset($data['instructor']) ? $data['instructor'] : null;
+            $class->instructor_mobile = isset($data['instructor_mobile']) ? $data['instructor_mobile'] : null;
+            $class->strength = isset($data['strength']) ? $data['strength'] : null;
+            $class->duration = $data['duration'];
+            $class->start_date = $data['start_date'];
+            $class->end_date = $data['end_date'];
+
+            if($class->save()){
+                return redirect()->back()
+                ->with('success', 'class updated successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to update class!');
+            }
+        }
     }
 
     /**
@@ -172,8 +223,17 @@ class ClassesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($school_id, $class_id)
     {
-        //
+        $class = Classes::findOrFail($class_id);
+        
+        if($class->delete()){
+                return redirect()->route('school.class.index',$school_id)
+                ->with('success', 'class deleted successfully');
+            }else{
+                return redirect()->route('school.class.index',$school_id)
+                ->withInput()
+                ->with('error','failed to delete class!');
+            }
     }
 }

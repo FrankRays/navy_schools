@@ -346,10 +346,10 @@ class SchoolsController extends Controller
         $course = Course::findOrFail($course_id);
         
         if($course->delete()){
-                return redirect()->back()
+                return redirect()->route('school.course.index',$school_id)
                 ->with('success', 'course deleted successfully');
             }else{
-                return redirect()->back()
+                return redirect()->route('school.course.index',$school_id)
                 ->withInput()
                 ->with('error','failed to delete course!');
             }
