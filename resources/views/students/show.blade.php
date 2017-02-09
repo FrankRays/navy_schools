@@ -63,9 +63,9 @@
 
                                 <div class="panel-footer">
                                 
-                                <a href="{!! route('student.edit',$student->id) !!}" class="btn btn-success btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
+                                <a href="{!! route('school.class.student.edit',[ $school_id, $class_id, $student->id]) !!}" class="btn btn-success btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
 
-                                  <a href="{!! route('student.delete',$student->id) !!}" class="btn btn-danger btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
+                                  <a href="{!! route('school.class.student.delete',[ $school_id, $class_id, $student->id]) !!}" class="btn btn-danger btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
                                 </div>
                             </div>
 

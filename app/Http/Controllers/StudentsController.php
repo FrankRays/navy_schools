@@ -122,12 +122,14 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($school_id, $class_id, $student_id)
     {
-      $student = Student::findOrFail($id);
+      $student = Student::findOrFail($student_id);
       return view('students.show')
             ->with('title', 'Student Details')
-            ->with('student', $student);
+            ->with('student', $student)
+            ->with('school_id', $school_id)
+            ->with('class_id', $class_id);
     }
 
     /**

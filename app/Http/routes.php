@@ -115,13 +115,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/class/{class_id}/student/{id}/edit',['as' => 'school.class.student.edit', 'uses' => 'StudentsController@edit']);
 	Route::put('school/{school_id}/class/{class_id}/student/{id}/update',['as' => 'school.class.student.update', 'uses' => 'StudentsController@update']);
 	Route::get('school/{school_id}/class/{class_id}/student/{id}/delete',['as' => 'school.class.student.delete', 'uses' => 'StudentsController@destroy']);
+	Route::get('school/{school_id}/class/{class_id}/student/{id}/show',['as' => 'school.class.student.show', 'uses' => 'StudentsController@show']);
 
-	// Student CRUD
-	Route::get('school/{school_id}/class/{class_id}/student',['as' => 'student.index', 'uses' => 'StudentsController@index']);
-	Route::get('school/{school_id}/class/{class_id}/student/create',['as' => 'student.create', 'uses' => 'StudentsController@create']);
-	Route::post('school/{school_id}/class/{class_id}/student',['as' => 'student.store', 'uses' => 'StudentsController@store']);
-	//not done
-	Route::get('school/{school_id}/class/{class_id}/student/{id}/show',['as' => 'student.show', 'uses' => 'StudentsController@show']);
+	// // Student CRUD
+	// Route::get('school/{school_id}/class/{class_id}/student',['as' => 'student.index', 'uses' => 'StudentsController@index']);
+	// Route::get('school/{school_id}/class/{class_id}/student/create',['as' => 'student.create', 'uses' => 'StudentsController@create']);
+	// Route::post('school/{school_id}/class/{class_id}/student',['as' => 'student.store', 'uses' => 'StudentsController@store']);
+	// Route::get('school/{school_id}/class/{class_id}/student/{id}/show',['as' => 'student.show', 'uses' => 'StudentsController@show']);
 });
 
 /* // Language CRUD
