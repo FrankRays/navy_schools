@@ -24,13 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $filePath = public_path()."/quote.txt";
-        // $schedule->command('inspire')
-        //          ->everyMinute()
-        //          ->sendOutputTo($filePath);
 
-        // $schedule->call('App\Http\Controllers\ClassesController@checkClass')
-        //         ->everyMinute();
+        $schedule->call('App\Http\Controllers\ClassesController@checkClass')
+                 ->everyMinute();
 
     }
 }

@@ -87,6 +87,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::post('school/{school_id}/course/{course_id}/si',['as' => 'school.course.si.store', 'uses' => 'SchoolsController@courseSI']);
 	Route::get('school/{school_id}/course/{course_id}/si/{id}/delete',['as' => 'school.course.si.delete', 'uses' => 'SchoolsController@deleteSI']);
 
+	//class auto creation through cron job
+	Route::get('class/check',['as' => 'class.check', 'uses' => 'ClassesController@checkClass']);
 	//school classes
 	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'ClassesController@index']);
 	Route::get('school/{id}/class/create',['as' => 'school.class.create', 'uses' => 'ClassesController@create']);

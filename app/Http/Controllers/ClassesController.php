@@ -16,10 +16,40 @@ class ClassesController extends Controller
 {
 
     public function checkClass(){
-        
-        $school = new School();
-        $school->name = "cron test";
-        $school->save();
+        $now = Carbon::now();
+        $courses = Course::where('start_date','<=', $now)
+                        ->where('end_date','>=', $now)
+                        ->with('classes')
+                        ->get();
+        $result = [];
+        foreach ($courses as $indx => $course) {
+            if($course->classes == null){
+                $result[] = $course;
+            }
+        }
+        // result - consists of all courses that needs a class to be generated
+        foreach ($result as $key => $course) {
+            $class = new Classes();
+            $class->school_id = $course->school_id;
+            $class->course_id = $course->id;
+            $class->name = $course->name;
+            $class->code = $course->code;
+            $class->officer = $course->officer;
+            $class->officer_mobile = $course->officer_mobile;
+            $class->chief = $course->chief;
+            $class->chief_mobile = $course->chief_mobile;
+            $class->strength = $course->strength;
+            $class->duration = $course->duration;
+            $class->start_date = $course->start_date;
+            $class->end_date = $course->end_date;
+
+            if($class->save()){
+                ;
+            }else{
+                return 'error';
+            }
+        }
+
     }
     /**
      * Display a listing of the resource.
