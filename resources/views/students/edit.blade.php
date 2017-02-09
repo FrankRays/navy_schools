@@ -16,7 +16,7 @@
                                     <h4>{{ $title }}</h4>
                             </div>
                             <div class="col-md-6">                            
-                                <a class="pull-right" href="{!! route('student.index')!!}"><button class="btn btn-success">Back</button></a>
+                                <a class="pull-right" href="{!! route('school.class.students',[$school_id, $class_id])!!}"><button class="btn btn-success">Back</button></a>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                                 
                             <div class=" form"> 
 
-                                {!! Form::model($student, array('route' => ['student.update',$student->id] , 'method' => 'put', 'class' => 'cmxform form-horizontal tasi-form', 'files' => true)) !!}
+                                {!! Form::model($student, array('route' => ['school.class.student.update', $school_id, $class_id, $student->id] , 'method' => 'put', 'class' => 'cmxform form-horizontal tasi-form', 'files' => true)) !!}
 
 
                                 <div class="form-group">

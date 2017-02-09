@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Redirect;
 use App\Student;
+use App\Classes;
 
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -19,13 +20,15 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($school_id, $class_id)
     {
-      $students = Student::all();
+      $classes = Classes::where('id',$class_id)->with('students')->get(); 
+
       return view('students.index')
               ->with('title', 'Student List')
               ->with('demoCounter', 1)
-              ->with('demos', $students);
+              ->with('demos', $students)
+              ->with('school_id', $school_id);
     }
 
     /**
@@ -33,10 +36,12 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($school_id, $class_id)
     {
         return view('students.create')
-                ->with('title','Add Student');
+                ->with('title','Add Student')
+                ->with('school_id', $school_id)
+                ->with('class_id', $class_id);
     }
 
     /**
@@ -45,7 +50,7 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($school_id, $class_id, Request $request)
     {
         $rules =[
             'name'  =>  'required',
@@ -88,7 +93,9 @@ class StudentsController extends Controller
                 ->withInput()
                 ->with('error','photo upload failed!');
             }
-            
+
+            $student->school_id = $school_id;
+            $student->class_id = $class_id;
             $student->name = $data['name'];
             $student->email = $data['email'];
             $student->blood_group = $data['blood_group'];
@@ -129,12 +136,14 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($school_id, $class_id, $student_id)
     {
-        $student = Student::findOrFail($id);
+        $student = Student::findOrFail($student_id);
         return view('students.edit')
             ->with('title', 'Edit Student Info')
-            ->with('student', $student);   
+            ->with('student', $student)
+            ->with('school_id', $school_id)
+            ->with('class_id', $class_id);   
     }
 
     /**
@@ -144,10 +153,10 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($school_id, $class_id, $student_id, Request $request)
     {
 
-        $student = Student::findOrFail($id);
+        $student = Student::findOrFail($student_id);
 
         $rules =[
             'email' =>  'email',
@@ -205,20 +214,20 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($school_id, $class_id, $student_id)
     {
         try{
-            $student = Student::findOrFail($id);
+            $student = Student::findOrFail($student_id);
             $photo_url = $student->photo_url;
             if($student->delete()){
                 unlink(public_path().$photo_url);
-                return Redirect::route('student.index')->with('success', 'student deleted successfully');
+                return Redirect::back()->with('success', 'student deleted successfully');
             }else{
-                return redirect()->route('student.index')
+                return redirect()->back()
                             ->with('warning','student deletion error');
             }
         }catch(\Exception $ex){
-            return redirect()->route('student.index')
+            return redirect()->back()
                             ->with('error','student deletion error');
         }
     }
