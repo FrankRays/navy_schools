@@ -13,6 +13,8 @@
                             @include('includes.alert')
                                 <ul class="nav nav-tabs profile-tabs">
                                     <li class="active"><a>{!! $title !!}</a></li>
+                                    <li><a href="{!! route('school.course.syllabus.index',[$school_id, $course->id]) !!}">Syllabus</a></li>
+                                    <li><a href="{!! route('school.course.si.index',[$school_id, $course->id]) !!}">Special Instructions</a></li>
                                     @if(!$course->approval)
                                     <li class="pull-right btn btn-success btn-xs"><a href="{!! route('school.course.approve',[$school_id, $course->id]) !!}"><i class="fa fa-save"></i>Draft</a></li>
                                     @endif
@@ -22,7 +24,7 @@
 
                                     <div id="aboutme" class="tab-pane active">
                                     <div class="profile-desk">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             
                                         <table class="table table-condensed">
                                             <tbody>
@@ -93,7 +95,7 @@
                                         </table>
                                         
                                         </div>
-                                        <div class="col-md-6">
+                                        <!-- <div class="col-md-6">
                                             
                                             <div class="row">
                                                 <div class="panel">
@@ -161,7 +163,7 @@
                                                     </div>
                                                 </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                     </div> <!-- end profile-desk -->

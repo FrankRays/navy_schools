@@ -57,16 +57,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('foni/delete/{id}', array('as' => 'foni.delete', 'uses' => 'FilesController@deleteFONI'));
 
 	//special instructions
-
-	// // Demo CRUD
-	// Route::get('demo',['as' => 'demo.index', 'uses' => 'DemoController@index']);
-	// Route::get('demo/create',['as' => 'demo.create', 'uses' => 'DemoController@create']);
-	// Route::post('demo',['as' => 'demo.store', 'uses' => 'DemoController@store']);
-	// Route::get('demo/{id}/edit',['as' => 'demo.edit', 'uses' => 'DemoController@edit']);
-	// Route::get('demo/{id}/show',['as' => 'demo.show', 'uses' => 'DemoController@show']);
-	// Route::put('demo/{id}',['as' => 'demo.update', 'uses' => 'DemoController@update']);
-	// Route::get('demo/delete/{id}',['as' => 'demo.delete', 'uses' => 'DemoController@destroy']);
-
 	
 
 	//Schools Routes
@@ -88,9 +78,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/course/approve/{course_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.course.approve', 'uses' => 'SchoolsController@approveCourse']);
 	
 	//course syllabus
+	Route::get('school/{school_id}/course/{course_id}/syllabus',['as' => 'school.course.syllabus.index', 'uses' => 'SchoolsController@indexSyllabus']);
 	Route::post('school/{school_id}/course/{course_id}/syllabus',['as' => 'school.course.syllabus.store', 'uses' => 'SchoolsController@courseSyllabus']);
+	Route::get('school/{school_id}/course/{course_id}/syllabus/{id}/delete',['as' => 'school.course.syllabus.delete', 'uses' => 'SchoolsController@deleteSyllabus']);
+
 	//course special instruction
+	Route::get('school/{school_id}/course/{course_id}/si',['as' => 'school.course.si.index', 'uses' => 'SchoolsController@indexSI']);
 	Route::post('school/{school_id}/course/{course_id}/si',['as' => 'school.course.si.store', 'uses' => 'SchoolsController@courseSI']);
+	Route::get('school/{school_id}/course/{course_id}/si/{id}/delete',['as' => 'school.course.si.delete', 'uses' => 'SchoolsController@deleteSI']);
 
 	//school classes
 	Route::get('school/{id}/class',['as' => 'school.class.index', 'uses' => 'ClassesController@index']);
@@ -117,20 +112,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/class/{class_id}/student/{id}/delete',['as' => 'school.class.student.delete', 'uses' => 'StudentsController@destroy']);
 	Route::get('school/{school_id}/class/{class_id}/student/{id}/show',['as' => 'school.class.student.show', 'uses' => 'StudentsController@show']);
 
-	// // Student CRUD
-	// Route::get('school/{school_id}/class/{class_id}/student',['as' => 'student.index', 'uses' => 'StudentsController@index']);
-	// Route::get('school/{school_id}/class/{class_id}/student/create',['as' => 'student.create', 'uses' => 'StudentsController@create']);
-	// Route::post('school/{school_id}/class/{class_id}/student',['as' => 'student.store', 'uses' => 'StudentsController@store']);
-	// Route::get('school/{school_id}/class/{class_id}/student/{id}/show',['as' => 'student.show', 'uses' => 'StudentsController@show']);
 });
-
-/* // Language CRUD
-	Route::get('language',['as' => 'language.index', 'uses' => 'LanguageController@index']);
-	Route::get('language/create',['as' => 'language.create', 'uses' => 'LanguageController@create']);
-	Route::post('language',['as' => 'language.store', 'uses' => 'LanguageController@store']);
-	Route::get('language/{id}/edit',['as' => 'language.edit', 'uses' => 'LanguageController@edit']);
-	Route::get('language/{id}/show',['as' => 'language.show', 'uses' => 'LanguageController@show']);
-	Route::put('language/{id}',['as' => 'language.update', 'uses' => 'LanguageController@update']);
-	Route::delete('language/{id}',['as' => 'language.delete', 'uses' => 'LanguageController@destroy']);
-
-*/

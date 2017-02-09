@@ -46,9 +46,9 @@
                                         <tbody>
                                         @foreach ($classes as $indx => $demo)
                                             
-                                            @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 10 && $today < $demo->start_date)
+                                            @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 15 && $today < $demo->start_date)
                                             <tr class='danger'>
-                                            @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 20 && $today < $demo->start_date)
+                                            @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 90 && $today < $demo->start_date)
                                             <tr class="warning">
                                             @elseif($today >= $demo->start_date && $today <= $demo->end_date)
                                             <tr class="success">

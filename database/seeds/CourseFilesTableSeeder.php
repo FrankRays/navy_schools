@@ -20,7 +20,8 @@ class CourseFilesTableSeeder extends Seeder
 	      [ 
 	      	'course_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
-	      	'type'		=>	'syllabus'
+	      	'type'		=>	'syllabus',
+	      	'subject'	=>	'sub1'
 	      ]
     	);
     }

@@ -17,6 +17,7 @@ class CreateCourseFilesTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->string('file_path');
             $table->string('type');
+            $table->string('subject')->nullable();
             $table->timestamps();
 
             $table->foreign('course_id')

@@ -116,10 +116,21 @@ class SchoolsController extends Controller
 
     }
 
+    public function indexSyllabus($school_id, $course_id){
+        $course = Course::where('id', $course_id)
+                                ->with('files')
+                                ->first();
+        return view('schools.courses.syllabus.index')
+                    ->with('title', $course->name.' '.$course->code)
+                    ->with('course', $course)
+                    ->with('school_id', $school_id);
+    }
+
     public function courseSyllabus($school_id, $course_id, Request $request)
     {
         
         $rules =[
+            'subject'   =>  'required',
             'file_path' =>  'required'
         ];
 
@@ -133,14 +144,7 @@ class SchoolsController extends Controller
                 ->withErrors($validation);
         }else{
 
-            //check any file already exists
-            $thisfile = CourseFile::where('course_id', $course_id)
-                                ->where('type', 'syllabus')
-                                ->first();
-
-            if(!$thisfile){
-                $thisfile = new CourseFile();
-            }
+            $thisfile = new CourseFile();
 
             if($request->hasFile('file_path')) {
                 $file = \Input::file('file_path');
@@ -162,6 +166,7 @@ class SchoolsController extends Controller
             
             $thisfile->course_id = $course_id;
             $thisfile->type = "syllabus";
+            $thisfile->subject = $data['subject'];
             
             if($thisfile->save()){
                 return redirect()->back()
@@ -172,6 +177,31 @@ class SchoolsController extends Controller
                 ->with('error','failed to save file!');
             }
         }
+    }
+
+    public function deleteSyllabus($school_id, $course_id, $syllabus_id){
+        $syllabus = CourseFile::findOrFail($syllabus_id);
+        $path = $syllabus->file_path;
+        if($syllabus->delete()){
+            unlink(public_path().$path);
+            
+            return redirect()->back()
+                ->with('success', 'file deleted successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to delete file!');
+            }        
+    }
+
+    public function indexSI($school_id, $course_id){
+        $course = Course::where('id', $course_id)
+                                ->with('files')
+                                ->first();
+        return view('schools.courses.si.index')
+                    ->with('title', $course->name.' '.$course->code)
+                    ->with('course', $course)
+                    ->with('school_id', $school_id);
     }
 
     public function courseSI($school_id, $course_id, Request $request)
@@ -190,15 +220,7 @@ class SchoolsController extends Controller
                 ->withInput()
                 ->withErrors($validation);
         }else{
-            //check any file already exists
-            $thisfile = CourseFile::where('course_id', $course_id)
-                                ->where('type', 'si')
-                                ->first();
-
-            if(!$thisfile){
-                $thisfile = new CourseFile();
-            }
-
+            
             $thisfile = new CourseFile();
 
             if($request->hasFile('file_path')) {
@@ -233,6 +255,21 @@ class SchoolsController extends Controller
         }
     }
 
+
+    public function deleteSI($school_id, $course_id, $si_id){
+        $si = CourseFile::findOrFail($si_id);
+        $path = $si->file_path;
+        if($si->delete()){
+            unlink(public_path().$path);
+            
+            return redirect()->back()
+                ->with('success', 'file deleted successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to delete file!');
+            }        
+    }
     /**
      * Show the form for creating a new resource.
      *
