@@ -167,11 +167,47 @@ class ResultsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($school_id, $class_id, $result_id)
     {
-        //
+        $result = Result::findOrFail($result_id);
+
+        return view('schools.classes.results.edit')
+                ->with('title', 'Edit Result')
+                ->with('class_id', $class_id)
+                ->with('school_id', $school_id)
+                ->with('result', $result);
     }
 
+    public function upgrade($school_id, $class_id, $result_id, Request $request){
+        $rules =[
+            'subject'       =>  'required',
+            'full_marks'    =>  'required'  
+        ];
+
+        $data = $request->all();
+
+        $validation = Validator::make($data,$rules);
+
+        if($validation->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validation);
+        }else{
+            $result = Result::findOrFail($result_id);
+            $result->subject = $data['subject'];
+            $result->full_marks = $data['full_marks'];
+
+            if($result->save()){
+                return redirect()->back()
+                ->with('success', 'result saved successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to save result!');
+            }
+        }
+
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -224,8 +260,23 @@ class ResultsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($school_id, $class_id, $result_id)
     {
-        //
+        $result = Result::findOrFail($result_id);
+        $file = $result->file_path;
+        
+        if($result->delete()){
+            try{
+                unlink(public_path().$file);
+            }catch(\Exception $ex){
+                ;
+            }
+                return redirect()->back()
+                ->with('success', 'result deleted successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to delete results!');
+            }
     }
 }

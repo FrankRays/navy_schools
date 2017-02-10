@@ -119,13 +119,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/class/{class_id}/result',['as' => 'school.class.result', 'uses' => 'ResultsController@index']);
 
 	Route::get('school/{school_id}/class/{class_id}/result/create',['as' => 'school.class.result.create', 'uses' => 'ResultsController@create']);
-	
 	Route::post('school/{school_id}/class/{class_id}/result/store',['as' => 'school.class.result.store', 'uses' => 'ResultsController@store']);
-	
+
+	Route::get('school/{school_id}/class/{class_id}/result/{result_id}/edit',['as' => 'school.class.result.edit', 'uses' => 'ResultsController@edit']);
+	Route::post('school/{school_id}/class/{class_id}/result/{result_id}/upgrade',['as' => 'school.class.result.upgrade', 'uses' => 'ResultsController@upgrade']);
+
 	Route::get('school/{school_id}/class/{class_id}/result/{result_id}',['as' => 'school.class.result.show', 'uses' => 'ResultsController@show']);
 
 	Route::post('school/{school_id}/class/{class_id}/result/{result_id}/file',['as' => 'school.class.result.file', 'uses' => 'ResultsController@file']);
 
 	Route::post('school/{school_id}/class/{class_id}/result/{result_id}/update/{student_id}',['as' => 'school.class.result.update', 'uses' => 'ResultsController@update']);
+
+	Route::get('school/{school_id}/class/{class_id}/result/{result_id}/delete',['as' => 'school.class.result.delete', 'uses' => 'ResultsController@destroy']);
+
 
 });
