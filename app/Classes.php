@@ -21,4 +21,8 @@ class Classes extends Model
     public function students(){
     	return $this->hasMany('App\Student', 'class_id', 'id');
     }
+
+    public function results(){
+        return $this->hasMany('App\Result', 'class_id', 'id');
+    }
 }

@@ -100,8 +100,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::put('school/{school_id}/class/update/{class_id}',['as' => 'school.class.update', 'uses' => 'ClassesController@update']);
 	Route::get('school/{school_id}/class/delete/{class_id}',['as' => 'school.class.delete', 'uses' => 'ClassesController@destroy']);
 
-	Route::get('school/{school_id}/class/result/{class_id}',['as' => 'school.class.result', 'uses' => 'ClassesController@result']);
-
 	//class appoval
 	Route::get('school/{school_id}/class/approve/{class_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.class.approve', 'uses' => 'ClassesController@approve']);
 
@@ -115,5 +113,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::put('school/{school_id}/class/{class_id}/student/{id}/update',['as' => 'school.class.student.update', 'uses' => 'StudentsController@update']);
 	Route::get('school/{school_id}/class/{class_id}/student/{id}/delete',['as' => 'school.class.student.delete', 'uses' => 'StudentsController@destroy']);
 	Route::get('school/{school_id}/class/{class_id}/student/{id}/show',['as' => 'school.class.student.show', 'uses' => 'StudentsController@show']);
+
+
+	//class results
+	Route::get('school/{school_id}/class/{class_id}/result',['as' => 'school.class.result', 'uses' => 'ResultsController@index']);
+
+	Route::get('school/{school_id}/class/{class_id}/result/create',['as' => 'school.class.result.create', 'uses' => 'ResultsController@create']);
+	
+	Route::post('school/{school_id}/class/{class_id}/result/store',['as' => 'school.class.result.store', 'uses' => 'ResultsController@store']);
+	
+	Route::get('school/{school_id}/class/{class_id}/result/{result_id}',['as' => 'school.class.result.show', 'uses' => 'ResultsController@show']);
+
+	Route::post('school/{school_id}/class/{class_id}/result/{result_id}/file',['as' => 'school.class.result.file', 'uses' => 'ResultsController@file']);
+
+	Route::post('school/{school_id}/class/{class_id}/result/{result_id}/update/{student_id}',['as' => 'school.class.result.update', 'uses' => 'ResultsController@update']);
 
 });
