@@ -12,15 +12,26 @@
                             <div class="panel-body p-0">
                                 <ul class="nav nav-tabs profile-tabs">
                                     <li class="active"><a data-toggle="tab" href="#aboutme">{!! $title !!}</a></li>
+                                    
                                 </ul>
 
                                 <div class="tab-content m-0">
-
+                                    @include('includes.alert')
                                     <div id="aboutme" class="tab-pane active">
+                                    @if($lab->photos->count() > 0 )
+                                    <div class="row">
+                                        <div class="my-slider col-md-8 col-md-offset-2">
+                                            <ul>
+                                            @foreach($lab->photos as $photo)
+                                                <li>
+                                                {!! Html::image($photo->file_path, $photo->description, array('class' => 'thumb')) !!}
+                                                </li>
+                                            @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="profile-desk">
-                                        <!-- <div class="img-wrapper m-r-15"><img src="{!! asset($lab->photo_url) !!}" width="20%" alt="profile photo" class="br-radius"></div> -->
-                                        <br>
-                                        
                                         <table class="table table-condensed">
                                             <thead>
                                                 <tr>
@@ -81,6 +92,8 @@
                                 
                                 <a href="{!! route('school.lab.edit',[ $school_id, $lab->id]) !!}" class="btn btn-success btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
 
+                                <a href="{!! route('school.lab.photos',[ $school_id, $lab->id]) !!}" class="btn btn-info btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Manage Photos</a>
+
                                   <a href="{!! route('school.lab.delete',[ $school_id, $lab->id]) !!}" class="btn btn-danger btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
                                 </div>
                             </div>
@@ -96,22 +109,38 @@
 <!-- ================== -->
 @stop
 
+@section('style')
+
+    {!! Html::style('css/unslider.css') !!}
+    {!! Html::style('css/unslider-dots.css') !!}
+
+    <style type="text/css">
+        .my-slider{
+            min-height: 300px;
+
+        }
+
+    </style>
+@stop
+
 @section('script')
-
-    {!! Html::script('assets/datatables/jquery.dataTables.min.js') !!}
-    {!! Html::script('assets/datatables/dataTables.bootstrap.js') !!}
-
-
-
+    
+    {!! Html::script('js/unslider-min.js') !!}
 
     <!-- for Datatable -->
     <script type="text/javascript">
 
-        $(document).ready(function() {
+        jQuery(document).ready(function() {
 
             $('[data-toggle=confirmation]').confirmation({
               rootSelector: '[data-toggle=confirmation]',
               // other options
+            });
+
+            $('.my-slider').unslider({
+                animation: 'fade',
+                autoplay: true,
+                arrows: false
             });
 
         });

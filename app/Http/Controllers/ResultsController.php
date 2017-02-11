@@ -271,7 +271,7 @@ class ResultsController extends Controller
             }catch(\Exception $ex){
                 ;
             }
-                return redirect()->back()
+                return redirect()->route('school.class.result', $school_id, $class_id)
                 ->with('success', 'result deleted successfully');
             }else{
                 return redirect()->back()

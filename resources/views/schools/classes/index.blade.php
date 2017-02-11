@@ -15,6 +15,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>{{ $title }}</h4>
+                                    @include('includes.alert')
                                 </div>
                                 <div class="col-md-6">
                                      <a class="pull-right" 

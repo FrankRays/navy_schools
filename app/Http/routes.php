@@ -141,5 +141,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/laboratory/{lab_id}/edit',['as' => 'school.lab.edit', 'uses' => 'LaboratoryController@edit']);
 	Route::put('school/{school_id}/laboratory/{lab_id}/edit',['as' => 'school.lab.update', 'uses' => 'LaboratoryController@update']);	
 	Route::get('school/{school_id}/laboratory/{lab_id}/delete',['as' => 'school.lab.delete', 'uses' => 'LaboratoryController@destroy']);
+	//lab photos
+	Route::get('school/{school_id}/laboratory/{lab_id}/photos',['as' => 'school.lab.photos', 'uses' => 'LaboratoryController@photos']);
+	Route::post('school/{school_id}/laboratory/{lab_id}/photos/add',['as' => 'school.lab.photos.add', 'uses' => 'LaboratoryController@addPhoto']);
+	Route::get('school/{school_id}/laboratory/{lab_id}/photos/{photo_id}/delete',['as' => 'school.lab.photos.delete', 'uses' => 'LaboratoryController@deletePhoto']);
 
 });

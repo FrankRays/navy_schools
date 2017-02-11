@@ -33,7 +33,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="panel">
-                                                    {!! Form::open([ 
+                                                {!! Form::open([ 
                                                 'route' => ['school.class.result.file', $school_id, $class->id, $result->id],
                                                 'method'=>'post','files'=>'true','class'=>'form-inline'
                                                 ]) !!}

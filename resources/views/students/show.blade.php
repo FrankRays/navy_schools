@@ -13,11 +13,12 @@
                                 <ul class="nav nav-tabs profile-tabs">
                                     <li class="active"><a data-toggle="tab" href="#aboutme">{!! $title !!}</a></li>
                                 </ul>
-
+            
                                 <div class="tab-content m-0">
 
                                     <div id="aboutme" class="tab-pane active">
                                     <div class="profile-desk">
+                                    @include('includes.alert')
                                         <div class="img-wrapper m-r-15"><img src="{!! asset($student->photo_url) !!}" width="20%" alt="profile photo" class="br-radius"></div>
                                         <br>
                                         <h1>{!! $student->name !!}</h1>

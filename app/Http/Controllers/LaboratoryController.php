@@ -8,8 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Redirect;
 
-use App\School, App\Laboratory;
+use App\School, App\Laboratory, App\LabPhoto;
 
 class LaboratoryController extends Controller
 {
@@ -97,7 +98,7 @@ class LaboratoryController extends Controller
      */
     public function show($school_id, $lab_id)
     {
-        $lab = Laboratory::findOrFail($lab_id);
+        $lab = Laboratory::where('id',$lab_id)->with('photos')->first();
 
         return view('schools.labs.show')
                 ->with('title', 'Lab Details')
@@ -185,7 +186,15 @@ class LaboratoryController extends Controller
 
             if($lab->delete()){
                 //delete all files under the lab
-                return redirect::back()->with('success', 'lab deleted successfully');
+                try{
+                    foreach ($info->photos as $photo) {
+                        unlink(public_path().$photo->file_path);
+                    }
+                }catch(\Exception $ex){
+                    ;
+                }
+
+                return redirect::route('school.lab', $school_id)->with('success', 'lab deleted successfully');
             }else{
                 return redirect()->back()
                             ->with('warning','lab deletion error');
@@ -193,6 +202,78 @@ class LaboratoryController extends Controller
         }catch(\Exception $ex){
             return redirect()->back()
                             ->with('error','lab deletion error');
+        }
+    }
+
+    public function photos($school_id, $lab_id){
+
+        $lab = Laboratory::where('id', $lab_id)->with('photos')->first();
+
+        return view('schools.labs.photos')
+                ->with('title','Manage Photos')
+                ->with('lab', $lab)
+                ->with('school_id', $school_id);
+    }
+
+    public function addPhoto($school_id, $lab_id, Request $request){
+        $rules =[
+            'file_path'  =>  'required'
+        ];
+
+        $data = $request->all();
+
+        $validation = Validator::make($data,$rules);
+
+        if($validation->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validation);
+        }else{
+
+            $thisfile = new LabPhoto();
+            $thisfile->lab_id = $lab_id;
+            $thisfile->description = isset($data['description']) ? $data['description'] : null;
+            if($request->hasFile('file_path')) {
+                $file = \Input::file('file_path');
+                //getting timestamp
+                $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+
+                $name = $timestamp. '-' .$file->getClientOriginalName();
+
+                
+                $file->move(public_path().'/uploads/files', $name);
+
+                $thisfile->file_path = '/uploads/files/'.$name;
+            }else{
+
+                return redirect()->back()
+                ->withInput()
+                ->with('error','file upload failed!');
+            }
+
+            if($thisfile->save()){
+                return redirect()->back()
+                ->with('success', 'photo saved successfully');
+            }else{
+                return redirect()->back()
+                ->withInput()
+                ->with('error','failed to save photo!');
+            }
+        }
+    }
+
+    public function deletePhoto($school_id, $lab_id, $photo_id){
+
+        $photo = LabPhoto::findOrFail($photo_id);
+
+        $path = $photo->file_path;
+
+        if($photo->delete()){
+            unlink(public_path().$path);
+            return redirect::back()->with('success', 'photo deleted successfully');
+        }else{
+            return redirect()->back()
+                            ->with('warning','photo deletion error');
         }
     }
 }

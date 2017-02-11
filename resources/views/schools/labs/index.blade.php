@@ -8,13 +8,14 @@
                 <div class="col-md-12">
 
                     <div class="panel panel-default">
-                    @include('includes.alert')
+                    
                     <span id="success"></span>
                     <span id="error"></span>
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>{{ $title }}</h4>
+                                    @include('includes.alert')
                                 </div>
                                 <div class="col-md-6">
                                      <a class="pull-right" href="{!! route('school.lab.create', $school->id) !!}"><button class="btn btn-success">Add Laboratory</button></a>

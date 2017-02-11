@@ -21,6 +21,7 @@
                         </div>
                     </div>
                         <div class="panel-body">
+                        @include('includes.alert')
                                 
                             <div class=" form"> 
 
