@@ -223,7 +223,7 @@ class StudentsController extends Controller
             $photo_url = $student->photo_url;
             if($student->delete()){
                 unlink(public_path().$photo_url);
-                return Redirect::back()->with('success', 'student deleted successfully');
+                return redirect::back()->with('success', 'student deleted successfully');
             }else{
                 return redirect()->back()
                             ->with('warning','student deletion error');
