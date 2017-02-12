@@ -23,6 +23,11 @@ class CreateLaboratoriesTable extends Migration
             $table->text('lab_facility')->nullable();
             $table->text('equipment_list')->nullable();
             $table->timestamps();
+
+
+            $table->foreign('school_id')
+                ->references('id')->on('schools')
+                ->onDelete('cascade');
         });
     }
 

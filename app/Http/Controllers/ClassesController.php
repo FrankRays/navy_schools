@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\School;
 use App\Classes;
 use App\Course;
+use Redirect;
 
 class ClassesController extends Controller
 {

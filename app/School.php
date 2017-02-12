@@ -20,4 +20,8 @@ class School extends Model
     public function labs(){
     	return $this->hasMany('App\Laboratory', 'school_id', 'id');	
     }
+
+    public function stuffs(){
+        return $this->hasMany('App\Stuff', 'school_id', 'id'); 
+    }
 }

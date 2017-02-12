@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MarksTableSeeder::class);
         $this->call(LaboratoryTableSeeder::class);
         $this->call(LabPhotosTableSeeder::class);
+        $this->call(StuffsTableSeeder::class);
 
         if (env('DB_CONNECTION') == 'mysql') {
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');

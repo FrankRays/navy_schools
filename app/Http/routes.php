@@ -146,4 +146,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::post('school/{school_id}/laboratory/{lab_id}/photos/add',['as' => 'school.lab.photos.add', 'uses' => 'LaboratoryController@addPhoto']);
 	Route::get('school/{school_id}/laboratory/{lab_id}/photos/{photo_id}/delete',['as' => 'school.lab.photos.delete', 'uses' => 'LaboratoryController@deletePhoto']);
 
+	//school admin routes
+	Route::group(['middleware' => ['role:admin|engeneering|electrical|seamanship']],function()
+	{
+		//stuffs module
+		Route::get('school/{school_id}/stuff',['as' => 'school.stuff','uses' =>'StuffsController@index']);
+		Route::get('school/{school_id}/stuff/create',['as' => 'school.stuff.create','uses' =>'StuffsController@create']);
+		Route::post('school/{school_id}/stuff/create',['as' => 'school.stuff.store','uses' =>'StuffsController@store']);
+		Route::get('school/{school_id}/stuff/{stuff_id}/edit',['as' => 'school.stuff.edit','uses' =>'StuffsController@edit']);
+		Route::put('school/{school_id}/stuff/{stuff_id}/edit',['as' => 'school.stuff.update','uses' =>'StuffsController@update']);
+		Route::get('school/{school_id}/stuff/{stuff_id}/delete',['as' => 'school.stuff.delete','uses' =>'StuffsController@destroy']);
+
+	});
+
 });
