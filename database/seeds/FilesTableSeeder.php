@@ -11,6 +11,7 @@ class FilesTableSeeder extends Seeder
         File::create(
 	      [ 
 	      	'user_id'	=>	1,
+	      	'school_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
 	      	'type'		=>	'tm',
 	      	'approval'	=>	false
@@ -19,6 +20,7 @@ class FilesTableSeeder extends Seeder
     	File::create(
 	      [ 
 	      	'user_id'	=>	1,
+	      	'school_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
 	      	'type'		=>	'fo',
 	      	'approval'	=>	true
@@ -43,6 +45,7 @@ class FilesTableSeeder extends Seeder
     	File::create(
 	      [ 
 	      	'user_id'	=>	1,
+	      	'school_id'	=>	1,
 	      	'file_path'	=>	'/uploads/files/test.pdf',
 	      	'type'		=>	'cor_in',
 	      	'approval'	=>	false

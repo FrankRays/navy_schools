@@ -28,12 +28,12 @@ class FilesController extends Controller
     public function foni()
     {
         $fo = File::where('type','fo')
-                    ->where('user_id', \Auth::user()->id)
+                    ->where('school_id', null)
                     ->orderBy('created_at', 'desc')
                     ->get();
 
         $ni = File::where('type','ni')
-                    ->where('user_id', \Auth::user()->id)
+                    ->where('school_id', null)
                     ->orderBy('created_at', 'desc')
                     ->get();
 

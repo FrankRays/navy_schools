@@ -9,9 +9,9 @@
                   <a data-toggle="dropdown" class="dropdown-toggle btn btn-lg btn-info" href="#" aria-expanded="true">Admin of School <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li><a href="{!! route('school.stuff',$school->id) !!}">Staffs</a></li>
-                        <li><a href="#">FO/NI</a></li>
-                        <li><a href="#">Special Instructions</a></li>
-                        <li><a href="#">Correspondences</a></li>
+                        <li><a href="{!! route('school.foni',$school->id) !!}">FO/NI</a></li>
+                        <li><a href="{!! route('school.tm',$school->id) !!}">Special Instructions</a></li>
+                        <li><a href="{!! route('school.cor',$school->id) !!}">Correspondences</a></li>
                     </ul>
                 @endif
                 <!-- <a href="" class="btn btn-lg btn-info">Admin of School</a> -->

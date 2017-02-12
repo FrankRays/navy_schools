@@ -24,4 +24,8 @@ class School extends Model
     public function stuffs(){
         return $this->hasMany('App\Stuff', 'school_id', 'id'); 
     }
+
+    public function files(){
+        return $this->hasMany('App\File', 'school_id', 'id'); 
+    }
 }
