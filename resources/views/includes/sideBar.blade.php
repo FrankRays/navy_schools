@@ -31,10 +31,10 @@
 
                     <li class="has-submenu"><a href="#"><i class="fa fa-user"></i> <span class="nav-label">Admin Panel</span></a>
                         <ul class="list-unstyled">
-                            <li><a href="#"> Staffs</a></li>
+                            <li><a href="{!! route('stuff') !!}"> Staffs</a></li>
                             <li><a href="{!! route('foni') !!}"> FO/NI</a></li>
-                            <li><a href="#"> Special Instructions</a></li>
-                            <li><a href="#"> Correspondences</a></li>
+                            <li><a href="{!! route('otherfiles', 'si') !!}"> Special Instructions</a></li>
+                            <li><a href="{!! route('otherfiles', 'cor') !!}"> Correspondences</a></li>
 
                         </ul>
                     </li>

@@ -48,16 +48,34 @@ Route::group(array('middleware' => 'auth'), function()
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], function()
 {
-	Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'Auth\AuthController@dashboard'));
-
-	//FO/NI CRD
-	Route::get('foni', array('as' => 'foni', 'uses' => 'FilesController@foni'));
-	Route::get('foni/create', array('as' => 'foni.create', 'uses' => 'FilesController@createFONI'));
-	Route::post('foni/create', array('as' => 'foni.store', 'uses' => 'FilesController@storeFONI'));
-	Route::get('foni/delete/{id}', array('as' => 'foni.delete', 'uses' => 'FilesController@deleteFONI'));
-
-	//special instructions
 	
+	//school admin routes
+	Route::group(['middleware' => ['role:admin|engineering|electrical|seamanship']],function()
+	{
+		Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'Auth\AuthController@dashboard'));
+
+		//stuffs module
+		Route::get('stuff',['as' => 'stuff','uses' =>'AdminStuffController@index']);
+		Route::get('stuff/create',['as' => 'stuff.create','uses' =>'AdminStuffController@create']);
+		Route::post('stuff/create',['as' => 'stuff.store','uses' =>'AdminStuffController@store']);
+		Route::get('stuff/{stuff_id}/edit',['as' => 'stuff.edit','uses' =>'AdminStuffController@edit']);
+		Route::put('stuff/{stuff_id}/edit',['as' => 'stuff.update','uses' =>'AdminStuffController@update']);
+		Route::get('stuff/{stuff_id}/delete',['as' => 'stuff.delete','uses' =>'AdminStuffController@destroy']);
+
+		//FONI menu CRD
+		Route::get('foni', array('as' => 'foni', 'uses' => 'FilesController@foni'));
+		Route::get('foni/create', array('as' => 'foni.create', 'uses' => 'FilesController@createFONI'));
+		Route::post('foni/create', array('as' => 'foni.store', 'uses' => 'FilesController@storeFONI'));
+		Route::get('foni/delete/{id}', array('as' => 'foni.delete', 'uses' => 'FilesController@deleteFONI'));
+
+		//Other Files CRD
+		Route::get('files/{type}', array('as' => 'otherfiles', 'uses' => 'FilesController@otherFiles'));
+		Route::get('files/{type}/create', array('as' => 'otherfiles.create', 'uses' => 'FilesController@createOtherFiles'));
+		Route::post('files/{type}/create', array('as' => 'otherfiles.store', 'uses' => 'FilesController@storeOtherFiles'));
+		Route::get('files/{type}/delete/{id}', array('as' => 'otherfiles.delete', 'uses' => 'FilesController@deleteOtherFiles'));
+
+
+	});
 
 	//Schools Routes
 	Route::get('school/{id}',['as' => 'school.show', 'uses' => 'SchoolsController@show']);
@@ -101,7 +119,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/class/delete/{class_id}',['as' => 'school.class.delete', 'uses' => 'ClassesController@destroy']);
 
 	//class appoval
-	Route::get('school/{school_id}/class/approve/{class_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.class.approve', 'uses' => 'ClassesController@approve']);
+	Route::get('school/{school_id}/class/approve/{class_id}',['middleware' => ['role:admin|engineering|electrical|seamanship'],'as' => 'school.class.approve', 'uses' => 'ClassesController@approve']);
 
 	//class students
 	Route::get('school/{school_id}/class/{class_id}/students',['as' => 'school.class.students', 'uses' => 'ClassesController@students']);
@@ -147,7 +165,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/laboratory/{lab_id}/photos/{photo_id}/delete',['as' => 'school.lab.photos.delete', 'uses' => 'LaboratoryController@deletePhoto']);
 
 	//school admin routes
-	Route::group(['middleware' => ['role:admin|engeneering|electrical|seamanship']],function()
+	Route::group(['middleware' => ['role:admin|engineering|electrical|seamanship']],function()
 	{
 		//stuffs module
 		Route::get('school/{school_id}/stuff',['as' => 'school.stuff','uses' =>'StuffsController@index']);
