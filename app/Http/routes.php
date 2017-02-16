@@ -52,7 +52,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 
 	
 	//school admin routes
-	Route::group(['middleware' => ['role:admin|engineering|electrical|seamanship']],function()
+	Route::group(['middleware' => ['role:admin']],function()
 	{
 		//stuffs module
 		Route::get('staff/select',['as' => 'staff.select','uses' =>'AdminStuffController@select']);
@@ -93,6 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::get('school/{school_id}/course/edit/{course_id}',['as' => 'school.course.edit', 'uses' => 'SchoolsController@editCourse']);
 	Route::put('school/{school_id}/course/update/{course_id}',['as' => 'school.course.update', 'uses' => 'SchoolsController@updateCourse']);
 	Route::get('school/{school_id}/course/delete/{course_id}',['as' => 'school.course.delete', 'uses' => 'SchoolsController@deleteCourse']);
+	
 	//course appoval
 	Route::get('school/{school_id}/course/approve/{course_id}',['middleware' => ['role:admin|engeneering|electrical|seamanship'],'as' => 'school.course.approve', 'uses' => 'SchoolsController@approveCourse']);
 	

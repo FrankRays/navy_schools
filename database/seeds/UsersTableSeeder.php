@@ -38,6 +38,7 @@ class UsersTableSeeder extends Seeder
 
         //seamanship editor
         $user = User::create(['username' => 'seamanship editor','email' => '3e@mail.com','password' => bcrypt('a')]);
+        $user->attachRole(8);
 
 
     }

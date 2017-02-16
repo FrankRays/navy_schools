@@ -55,8 +55,15 @@ class SchoolsController extends Controller
         $date = Carbon::now();
         $courses = Course::where('school_id', $school_id)   
                             ->where('start_date','<=',$date)
-                            ->where('end_date','>=', $date)
+                            //->where('end_date','<=',$date)
                             ->get();
+        foreach ($courses as $indx=>$course) {
+            $day = (new Carbon($course->end_date))->addDays(14);
+            if($date > $day){
+                unset($courses[$indx]);
+            }
+
+        }
 
         return view('schools.courses.ongoing')
                 ->with('title', 'Ongoing Courses')
@@ -106,10 +113,11 @@ class SchoolsController extends Controller
                                 ->where('name','like','%'.$course_name.'%')   
                                 ->where('start_date','<=',$date)
                                 ->where('end_date','<=', $date)
+                                ->with('classes')
                                 ->orderBy('id','desc')
                                 ->get();
         
-        return view('schools.courses.ongoing')
+        return view('schools.courses.archived')
                 ->with('title', 'Archive')
                 ->with('courses', $courses)
                 ->with('school_id', $school_id);
