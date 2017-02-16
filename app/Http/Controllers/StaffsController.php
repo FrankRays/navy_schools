@@ -37,6 +37,7 @@ class StaffsController extends Controller
             return view('schools.staffs.index')
                     ->with('title', 'Admin of School - Officers')
                     ->with('school', $school)
+                    ->with('type', $type)
                     ->with('staffs', $staffs);
         }elseif($type == 'sailor'){
             $staffs = Staff::where('school_id',$school_id)
@@ -46,6 +47,7 @@ class StaffsController extends Controller
             return view('schools.staffs.index')
                     ->with('title', 'Admin of School - Sailors')
                     ->with('staffs', $staffs)
+                    ->with('type', $type)
                     ->with('school', $school);
         }elseif($type == 'civil'){
 
@@ -56,6 +58,7 @@ class StaffsController extends Controller
             return view('schools.staffs.index')
                     ->with('title', 'Admin of School - Civil')
                     ->with('staffs', $staffs)
+                    ->with('type', $type)
                     ->with('school', $school);
         }
     }
@@ -65,17 +68,11 @@ class StaffsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($school_id)
+    public function create($school_id, $type)
     {
-        $types = [
-            null        =>  'Select a category',
-            'officer'   =>  'Officer',
-            'sailor'    =>  'JCO/Sailor',
-            'civil'     =>  'Civil'
-        ];
         return view('schools.staffs.create')
                 ->with('title', 'Add Staff')
-                ->with('types', $types)
+                ->with('type', $type)
                 ->with('school_id', $school_id);
     }
 
@@ -85,13 +82,12 @@ class StaffsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($school_id, Request $request)
+    public function store($school_id, $type, Request $request)
     {
         $rules =[
             'name'  =>  'required',
             'rank'  =>  'required',
-            'po'    =>  'required',
-            'type'  =>  'required'
+            'po'    =>  'required'
         ];
 
         $data = $request->all();
@@ -109,8 +105,10 @@ class StaffsController extends Controller
             $stuff->name = $data['name'];
             $stuff->school_id = $school_id;
             $stuff->user_id = \Auth::user()->id;
-            $stuff->type = $data['type'];
+            $stuff->type = $type;
             $stuff->po = $data['po'];
+            $stuff->contact = isset($data['contact'])?$data['contact']:null;
+            $stuff->appointment = isset($data['appointment'])?$data['appointment']:null;
 
             if($stuff->save()){
                 return redirect()->back()
@@ -144,15 +142,8 @@ class StaffsController extends Controller
     {
         $stuff = Staff::findOrFail($stuff_id);
 
-        $types = [
-            null        =>  'Select a category',
-            'officer'   =>  'Officer',
-            'sailor'    =>  'Sailor',
-            'civil'     =>  'Civil'
-        ];
         return view('schools.staffs.edit')
                 ->with('title', 'Update Staff Info')
-                ->with('types', $types)
                 ->with('stuff', $stuff)
                 ->with('school_id', $school_id);
     }
@@ -169,8 +160,7 @@ class StaffsController extends Controller
         $rules =[
             'name'  =>  'required',
             'rank'  =>  'required',
-            'po'    =>  'required',
-            'type'  =>  'required'
+            'po'    =>  'required'
         ];
 
         $data = $request->all();
@@ -186,8 +176,9 @@ class StaffsController extends Controller
             $stuff = Staff::findOrFail($stuff_id);
             $stuff->rank = $data['rank'];
             $stuff->name = $data['name'];
-            $stuff->type = $data['type'];
             $stuff->po   = $data['po'];
+            $stuff->contact = isset($data['contact'])?$data['contact']:null;
+            $stuff->appointment = isset($data['appointment'])?$data['appointment']:null;
 
             if($stuff->save()){
                 return redirect()->back()

@@ -2,29 +2,33 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Stuff;
+use App\Staff;
 
-class StuffsTableSeeder extends Seeder
+class StaffsTableSeeder extends Seeder
 {
     public function run()
     {
-    	Stuff::create([
+    	Staff::create([
     		'user_id'	=>	2,
     		'school_id'	=>	1,
     		'rank'		=>	'PC',
     		'name'		=>	'Test Name',
     		'po'		=>	'adad',
-    		'type'		=>	'civil'
+    		'type'		=>	'civil',
+            'appointment'=> 'Course Officer',
+            'contact'   =>  '012312323'
     	]);
 
 
-    	Stuff::create([
+    	Staff::create([
     		'user_id'	=>	1,
     		'school_id'	=>	null,
     		'rank'		=>	'PC',
     		'name'		=>	'Test2 Name',
     		'po'		=>	'adad',
-    		'type'		=>	'officer'
+    		'type'		=>	'officer',
+            'appointment'=> 'Course Officer',
+            'contact'   =>  '012312323'
     	]);
     }
 }

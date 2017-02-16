@@ -166,9 +166,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 
 	//stuffs module
 	Route::get('school/{school_id}/staff/select',['as' => 'school.staff.select','uses' =>'StaffsController@select']);
-	Route::get('school/{school_id}/staff/create',['as' => 'school.staff.create','uses' =>'StaffsController@create']);
-	Route::post('school/{school_id}/staff/store',['as' => 'school.staff.store','uses' =>'StaffsController@store']);
 	Route::get('school/{school_id}/staff/{type}',['as' => 'school.staff','uses' =>'StaffsController@index']);
+	Route::get('school/{school_id}/staff/{type}/create',['as' => 'school.staff.create','uses' =>'StaffsController@create']);
+	Route::post('school/{school_id}/staff/{type}/store',['as' => 'school.staff.store','uses' =>'StaffsController@store']);
 	Route::get('school/{school_id}/staff/{staff_id}/edit',['as' => 'school.staff.edit','uses' =>'StaffsController@edit']);
 	Route::put('school/{school_id}/staff/{staff_id}/edit',['as' => 'school.staff.update','uses' =>'StaffsController@update']);
 	Route::get('school/{school_id}/staff/{staff_id}/delete',['as' => 'school.staff.delete','uses' =>'StaffsController@destroy']);

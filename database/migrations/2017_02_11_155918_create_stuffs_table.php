@@ -12,13 +12,15 @@ class CreateStuffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stuffs', function (Blueprint $table) {
+        Schema::create('staffs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('school_id')->unsigned()->nullable();
             $table->string('rank')->nullable();
             $table->string('name')->nullable();
             $table->string('po')->nullable();
+            $table->string('appointment')->nullable();
+            $table->string('contact')->nullable();
             $table->string('type');
             $table->timestamps();
 
@@ -40,6 +42,6 @@ class CreateStuffsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('stuffs');
+        Schema::drop('staffs');
     }
 }
