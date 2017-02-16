@@ -40,6 +40,8 @@
                                                 Auth::user()->hasRole('seamanship'))
                                             <th>Verification</th>
                                             @endif
+                                            <th>Days Left</th>
+                                            <th>Status</th>
                                             <th>#</th>
                                         </tr>
                                         </thead>
@@ -68,6 +70,20 @@
                                                     </td>
                                                 @endif
                                                 @endif
+                                                <td>                               @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 90 && $today < $demo->start_date){!! $today->diffInDays(Carbon\Carbon::parse($demo->start_date)) !!}
+                                                @endif
+
+                                                </td>
+                                                <td>@if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 15 && $today < $demo->start_date)
+                                                Course will start soon
+                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 90 && $today < $demo->start_date)
+                                                Continue
+                                                @elseif($today >= $demo->start_date && $today <= $demo->end_date)
+                                                started
+                                                @else
+                                                other
+                                                @endif
+                                                </td>
                                                 <td>
                                                   <a href="{!! route('school.course.show',[$school_id,$demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
                                                   <a href="{!! route('school.course.edit',[$school_id,$demo->id]) !!}" class="btn btn-success btn-xs btn-archive" href="#" style="margin-right: 3px;">Edit</a>

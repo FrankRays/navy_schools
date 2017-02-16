@@ -15,7 +15,7 @@
                                     <h4>{{ $title }}</h4>
                             </div>
                             <div class="col-md-6">                            
-                                <a class="pull-right" href="{!! route('school.stuff',$school_id)!!}"><button class="btn btn-info">Back</button></a>
+                                <a class="pull-right" href="{!! route('school.staff.select',$school_id) !!}"><button class="btn btn-info">Back</button></a>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                                 
                             <div class=" form"> 
 
-                                {!! Form::model($stuff, array('route' => ['school.stuff.update', $school_id, $stuff->id] , 'method' => 'put', 'class' => 'cmxform form-horizontal tasi-form')) !!}
+                                {!! Form::open(array('route' => ['school.staff.store', $school_id] , 'method' => 'post', 'class' => 'cmxform form-horizontal tasi-form')) !!}
 
 
                                 <div class="form-group">
@@ -48,7 +48,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('type', "Stuff Category", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('type', "Staff Category", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
                                         {!! Form::select('type', $types, null, array('class' => 'form-control')) !!}
                                     </div>

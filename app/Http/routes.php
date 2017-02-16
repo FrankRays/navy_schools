@@ -48,12 +48,12 @@ Route::group(array('middleware' => 'auth'), function()
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], function()
 {
+	Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'Auth\AuthController@dashboard'));
+
 	
 	//school admin routes
 	Route::group(['middleware' => ['role:admin|engineering|electrical|seamanship']],function()
 	{
-		Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'Auth\AuthController@dashboard'));
-
 		//stuffs module
 		Route::get('stuff',['as' => 'stuff','uses' =>'AdminStuffController@index']);
 		Route::get('stuff/create',['as' => 'stuff.create','uses' =>'AdminStuffController@create']);
@@ -164,35 +164,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::post('school/{school_id}/laboratory/{lab_id}/photos/add',['as' => 'school.lab.photos.add', 'uses' => 'LaboratoryController@addPhoto']);
 	Route::get('school/{school_id}/laboratory/{lab_id}/photos/{photo_id}/delete',['as' => 'school.lab.photos.delete', 'uses' => 'LaboratoryController@deletePhoto']);
 
-	//school admin routes
-	Route::group(['middleware' => ['role:admin|engineering|electrical|seamanship']],function()
-	{
-		//stuffs module
-		Route::get('school/{school_id}/stuff',['as' => 'school.stuff','uses' =>'StuffsController@index']);
-		Route::get('school/{school_id}/stuff/create',['as' => 'school.stuff.create','uses' =>'StuffsController@create']);
-		Route::post('school/{school_id}/stuff/create',['as' => 'school.stuff.store','uses' =>'StuffsController@store']);
-		Route::get('school/{school_id}/stuff/{stuff_id}/edit',['as' => 'school.stuff.edit','uses' =>'StuffsController@edit']);
-		Route::put('school/{school_id}/stuff/{stuff_id}/edit',['as' => 'school.stuff.update','uses' =>'StuffsController@update']);
-		Route::get('school/{school_id}/stuff/{stuff_id}/delete',['as' => 'school.stuff.delete','uses' =>'StuffsController@destroy']);
+	//stuffs module
+	Route::get('school/{school_id}/staff/select',['as' => 'school.staff.select','uses' =>'StaffsController@select']);
+	Route::get('school/{school_id}/staff/create',['as' => 'school.staff.create','uses' =>'StaffsController@create']);
+	Route::post('school/{school_id}/staff/store',['as' => 'school.staff.store','uses' =>'StaffsController@store']);
+	Route::get('school/{school_id}/staff/{type}',['as' => 'school.staff','uses' =>'StaffsController@index']);
+	Route::get('school/{school_id}/staff/{staff_id}/edit',['as' => 'school.staff.edit','uses' =>'StaffsController@edit']);
+	Route::put('school/{school_id}/staff/{staff_id}/edit',['as' => 'school.staff.update','uses' =>'StaffsController@update']);
+	Route::get('school/{school_id}/staff/{staff_id}/delete',['as' => 'school.staff.delete','uses' =>'StaffsController@destroy']);
 
-		//FO/NI CRD
-		Route::get('school/{school_id}/foni', array('as' => 'school.foni', 'uses' => 'SchoolFilesController@foni'));
-		Route::get('school/{school_id}/foni/create', array('as' => 'school.foni.create', 'uses' => 'SchoolFilesController@createFONI'));
-		Route::post('school/{school_id}/foni/create', array('as' => 'school.foni.store', 'uses' => 'SchoolFilesController@storeFONI'));
-		Route::get('school/{school_id}/foni/{id}/delete', array('as' => 'school.foni.delete', 'uses' => 'SchoolFilesController@deleteFONI'));
+	//FO/NI CRD
+	Route::get('school/{school_id}/foni', array('as' => 'school.foni', 'uses' => 'SchoolFilesController@foni'));
+	Route::get('school/{school_id}/foni/create', array('as' => 'school.foni.create', 'uses' => 'SchoolFilesController@createFONI'));
+	Route::post('school/{school_id}/foni/create', array('as' => 'school.foni.store', 'uses' => 'SchoolFilesController@storeFONI'));
+	Route::get('school/{school_id}/foni/{id}/delete', array('as' => 'school.foni.delete', 'uses' => 'SchoolFilesController@deleteFONI'));
 
-		//Special Instructions CRD
-		Route::get('school/{school_id}/si', array('as' => 'school.tm', 'uses' => 'SchoolFilesController@tm'));
-		Route::get('school/{school_id}/si/create', array('as' => 'school.tm.create', 'uses' => 'SchoolFilesController@createTM'));
-		Route::post('school/{school_id}/si/create', array('as' => 'school.tm.store', 'uses' => 'SchoolFilesController@storeTM'));
-		Route::get('school/{school_id}/si/{id}/delete', array('as' => 'school.tm.delete', 'uses' => 'SchoolFilesController@deleteTM'));
+	//Special Instructions CRD
+	Route::get('school/{school_id}/si', array('as' => 'school.tm', 'uses' => 'SchoolFilesController@tm'));
+	Route::get('school/{school_id}/si/create', array('as' => 'school.tm.create', 'uses' => 'SchoolFilesController@createTM'));
+	Route::post('school/{school_id}/si/create', array('as' => 'school.tm.store', 'uses' => 'SchoolFilesController@storeTM'));
+	Route::get('school/{school_id}/si/{id}/delete', array('as' => 'school.tm.delete', 'uses' => 'SchoolFilesController@deleteTM'));
 
-		//Correspondences CRD
-		Route::get('school/{school_id}/cor', array('as' => 'school.cor', 'uses' => 'SchoolFilesController@cor'));
-		Route::get('school/{school_id}/cor/create', array('as' => 'school.cor.create', 'uses' => 'SchoolFilesController@createCor'));
-		Route::post('school/{school_id}/cor/create', array('as' => 'school.cor.store', 'uses' => 'SchoolFilesController@storeCOR'));
-		Route::get('school/{school_id}/cor/{id}/delete', array('as' => 'school.cor.delete', 'uses' => 'SchoolFilesController@deleteCOR'));
-
-	});
+	//Correspondences CRD
+	Route::get('school/{school_id}/cor', array('as' => 'school.cor', 'uses' => 'SchoolFilesController@cor'));
+	Route::get('school/{school_id}/cor/create', array('as' => 'school.cor.create', 'uses' => 'SchoolFilesController@createCor'));
+	Route::post('school/{school_id}/cor/create', array('as' => 'school.cor.store', 'uses' => 'SchoolFilesController@storeCOR'));
+	Route::get('school/{school_id}/cor/{id}/delete', array('as' => 'school.cor.delete', 'uses' => 'SchoolFilesController@deleteCOR'));
 
 });

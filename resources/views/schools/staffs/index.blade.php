@@ -22,10 +22,10 @@
                                     <div class="panel-heading">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <h4>Stuffs</h4>
+                                                <h4>Staffs</h4>
                                             </div>
                                             <div class="col-md-6">
-                                                 <a class="pull-right" href="{!! route('school.stuff.create',$school->id) !!}"><button class="btn btn-success">Add Stuff</button></a>
+                                                 <a class="pull-right" href="{!! route('school.staff.create',$school->id) !!}"><button class="btn btn-success">Add Staff</button></a>
                                             </div>
                                         </div>
                                     </div>
@@ -41,7 +41,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($school->stuffs as $indx=>$demo)
+                                        @foreach ($staffs as $indx=>$demo)
 
                                             <tr>
                                                 <td>{!! $indx+1 !!}</td>
@@ -49,8 +49,8 @@
                                                 <td>{!! $demo->type !!}</td>
                                                 <td>{!! $demo->po !!}</td>
                                                 <td>
-                                                    <a href="{!! route('school.stuff.edit',[ $school->id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
-                                                    <a href="{!! route('school.stuff.delete',[ $school->id, $demo->id]) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
+                                                    <a href="{!! route('school.staff.edit',[ $school->id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
+                                                    <a href="{!! route('school.staff.delete',[ $school->id, $demo->id]) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
                                                       
                                                 </td>
                                             </tr>

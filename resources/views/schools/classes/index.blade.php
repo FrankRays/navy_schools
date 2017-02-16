@@ -15,11 +15,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>{{ $title }}</h4>
-                                    @include('includes.alert')
                                 </div>
                                 <div class="col-md-6">
                                      <a class="pull-right" 
-                                        href="{{ route('school.class.create', $school_id) }}">
+                                        href="{{ route('class.check') }}">
                                         <button class="btn btn-success">Add Class</button>
                                     </a>
                                 </div>

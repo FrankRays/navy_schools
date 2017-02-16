@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stuff extends Model
+class Staff extends Model
 {
+	protected $table = 'stuffs';
     protected $guarded = ['id'];
 }

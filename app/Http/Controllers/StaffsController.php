@@ -9,26 +9,55 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\School;
-use App\Stuff;
+use App\Staff;
 use Redirect;
 
-class StuffsController extends Controller
+class StaffsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function index($school_id)
+    public function select($school_id)
     {
-        $school = School::where('id', $school_id)
-                        ->with('stuffs') 
+        $school = School::where('id', $school_id) 
                         ->first();
 
-        return view('schools.stuffs.index')
+        return view('schools.staffs.select')
             ->with('title', 'Admin of School')
             ->with('school', $school);
+    }
+
+    public function index($school_id, $type)
+    {
+        $school = School::where('id', $school_id) 
+                        ->first();
+
+        if($type == 'officer'){
+            $staffs = Staff::where('school_id',$school_id)
+                            ->where('type', 'officer')
+                            ->get();
+
+            return view('schools.staffs.index')
+                    ->with('title', 'Admin of School - Officers')
+                    ->with('school', $school)
+                    ->with('staffs', $staffs);
+        }elseif($type == 'sailor'){
+            $staffs = Staff::where('school_id',$school_id)
+                            ->where('type', 'sailor')
+                            ->get();
+
+            return view('schools.staffs.index')
+                    ->with('title', 'Admin of School - Sailors')
+                    ->with('staffs', $staffs)
+                    ->with('school', $school);
+        }elseif($type == 'civil'){
+
+            $staffs = Staff::where('school_id',$school_id)
+                            ->where('type', 'civil')
+                            ->get();
+
+            return view('schools.staffs.index')
+                    ->with('title', 'Admin of School - Civil')
+                    ->with('staffs', $staffs)
+                    ->with('school', $school);
+        }
     }
 
     /**
@@ -41,11 +70,11 @@ class StuffsController extends Controller
         $types = [
             null        =>  'Select a category',
             'officer'   =>  'Officer',
-            'sailor'    =>  'Sailor',
+            'sailor'    =>  'JCO/Sailor',
             'civil'     =>  'Civil'
         ];
-        return view('schools.stuffs.create')
-                ->with('title', 'Add Stuff')
+        return view('schools.staffs.create')
+                ->with('title', 'Add Staff')
                 ->with('types', $types)
                 ->with('school_id', $school_id);
     }
@@ -75,7 +104,7 @@ class StuffsController extends Controller
                 ->withErrors($validation);
         }else{
 
-            $stuff = new Stuff();
+            $stuff = new Staff();
             $stuff->rank = $data['rank'];
             $stuff->name = $data['name'];
             $stuff->school_id = $school_id;
@@ -113,7 +142,7 @@ class StuffsController extends Controller
      */
     public function edit($school_id, $stuff_id)
     {
-        $stuff = Stuff::findOrFail($stuff_id);
+        $stuff = Staff::findOrFail($stuff_id);
 
         $types = [
             null        =>  'Select a category',
@@ -121,8 +150,8 @@ class StuffsController extends Controller
             'sailor'    =>  'Sailor',
             'civil'     =>  'Civil'
         ];
-        return view('schools.stuffs.edit')
-                ->with('title', 'Update Stuff Info')
+        return view('schools.staffs.edit')
+                ->with('title', 'Update Staff Info')
                 ->with('types', $types)
                 ->with('stuff', $stuff)
                 ->with('school_id', $school_id);
@@ -154,7 +183,7 @@ class StuffsController extends Controller
                 ->withErrors($validation);
         }else{
 
-            $stuff = Stuff::findOrFail($stuff_id);
+            $stuff = Staff::findOrFail($stuff_id);
             $stuff->rank = $data['rank'];
             $stuff->name = $data['name'];
             $stuff->type = $data['type'];
@@ -162,11 +191,11 @@ class StuffsController extends Controller
 
             if($stuff->save()){
                 return redirect()->back()
-                ->with('success', 'Stuff saved successfully');
+                ->with('success', 'Staff saved successfully');
             }else{
                 return redirect()->back()
                 ->withInput()
-                ->with('error','failed to save stuff!');
+                ->with('error','failed to save staff!');
             }
         }
     }
@@ -180,17 +209,17 @@ class StuffsController extends Controller
     public function destroy($school_id, $stuff_id)
     {
         try{
-            $stuff = Stuff::findOrFail($stuff_id);
+            $stuff = Staff::findOrFail($stuff_id);
             
             if($stuff->delete()){
-                return redirect::back()->with('success', 'stuff deleted successfully');
+                return redirect::back()->with('success', 'staff deleted successfully');
             }else{
                 return redirect()->back()
-                            ->with('warning','stuff deletion error');
+                            ->with('warning','staff deletion error');
             }
         }catch(\Exception $ex){
             return redirect()->back()
-                            ->with('error','stuff deletion error');
+                            ->with('error','staff deletion error');
         }
     }
 }
