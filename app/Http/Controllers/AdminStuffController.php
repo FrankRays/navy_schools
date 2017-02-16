@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\School;
-use App\Stuff;
+use App\Staff;
 use Redirect;
 
 class AdminStuffController extends Controller
@@ -19,15 +19,22 @@ class AdminStuffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function index()
+    public function select()
     {
-        $stuffs = Stuff::where('school_id', null) 
+        return view('admin.staffs.select')
+            ->with('title', 'Admin');
+    }
+
+    public function index($type)
+    {
+        $staffs = Staff::where('school_id', null)
+                        ->where('type', $type) 
                         ->get();
 
-        return view('admin.stuffs.index')
-            ->with('title', 'Stuffs')
-            ->with('stuffs', $stuffs);
+        return view('admin.staffs.index')
+            ->with('title', 'Staffs - '.$type)
+            ->with('type', $type)
+            ->with('stuffs', $staffs);
     }
 
     /**
@@ -35,17 +42,11 @@ class AdminStuffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
-        $types = [
-            null        =>  'Select a category',
-            'officer'   =>  'Officer',
-            'sailor'    =>  'Sailor',
-            'civil'     =>  'Civil'
-        ];
-        return view('admin.stuffs.create')
+        return view('admin.staffs.create')
                 ->with('title', 'Add Stuff')
-                ->with('types', $types);
+                ->with('type', $type);
     }
 
     /**
@@ -54,13 +55,12 @@ class AdminStuffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($type, Request $request)
     {
         $rules =[
             'name'  =>  'required',
             'rank'  =>  'required',
-            'po'    =>  'required',
-            'type'  =>  'required'
+            'po'    =>  'required'
         ];
 
         $data = $request->all();
@@ -73,20 +73,22 @@ class AdminStuffController extends Controller
                 ->withErrors($validation);
         }else{
 
-            $stuff = new Stuff();
+            $stuff = new Staff();
             $stuff->rank = $data['rank'];
             $stuff->name = $data['name'];
             $stuff->user_id = \Auth::user()->id;
-            $stuff->type = $data['type'];
+            $stuff->type = $type;
             $stuff->po = $data['po'];
+            $stuff->contact = isset($data['contact'])?$data['contact']:null;
+            $stuff->appointment = isset($data['appointment'])?$data['appointment']:null;
 
             if($stuff->save()){
                 return redirect()->back()
-                ->with('success', 'Stuff saved successfully');
+                ->with('success', 'Staff saved successfully');
             }else{
                 return redirect()->back()
                 ->withInput()
-                ->with('error','failed to save stuff!');
+                ->with('error','failed to save staff!');
             }
         }
     }
@@ -110,18 +112,11 @@ class AdminStuffController extends Controller
      */
     public function edit($stuff_id)
     {
-        $stuff = Stuff::findOrFail($stuff_id);
+        $staff = Staff::findOrFail($stuff_id);
 
-        $types = [
-            null        =>  'Select a category',
-            'officer'   =>  'Officer',
-            'sailor'    =>  'Sailor',
-            'civil'     =>  'Civil'
-        ];
-        return view('admin.stuffs.edit')
-                ->with('title', 'Update Stuff Info')
-                ->with('types', $types)
-                ->with('stuff', $stuff);
+        return view('admin.staffs.edit')
+                ->with('title', 'Update Staff Info')
+                ->with('staff', $staff);
     }
 
     /**
@@ -136,8 +131,7 @@ class AdminStuffController extends Controller
         $rules =[
             'name'  =>  'required',
             'rank'  =>  'required',
-            'po'    =>  'required',
-            'type'  =>  'required'
+            'po'    =>  'required'
         ];
 
         $data = $request->all();
@@ -150,19 +144,20 @@ class AdminStuffController extends Controller
                 ->withErrors($validation);
         }else{
 
-            $stuff = Stuff::findOrFail($stuff_id);
+            $stuff = Staff::findOrFail($stuff_id);
             $stuff->rank = $data['rank'];
             $stuff->name = $data['name'];
-            $stuff->type = $data['type'];
             $stuff->po   = $data['po'];
+            $stuff->contact = isset($data['contact'])?$data['contact']:null;
+            $stuff->appointment = isset($data['appointment'])?$data['appointment']:null;
 
             if($stuff->save()){
                 return redirect()->back()
-                ->with('success', 'Stuff saved successfully');
+                ->with('success', 'Staff saved successfully');
             }else{
                 return redirect()->back()
                 ->withInput()
-                ->with('error','failed to save stuff!');
+                ->with('error','failed to save staff!');
             }
         }
     }
@@ -176,17 +171,17 @@ class AdminStuffController extends Controller
     public function destroy($stuff_id)
     {
         try{
-            $stuff = Stuff::findOrFail($stuff_id);
+            $stuff = Staff::findOrFail($stuff_id);
             
             if($stuff->delete()){
-                return redirect::back()->with('success', 'stuff deleted successfully');
+                return redirect::back()->with('success', 'staff deleted successfully');
             }else{
                 return redirect()->back()
-                            ->with('warning','stuff deletion error');
+                            ->with('warning','staff deletion error');
             }
         }catch(\Exception $ex){
             return redirect()->back()
-                            ->with('error','stuff deletion error');
+                            ->with('error','staff deletion error');
         }
     }
 }

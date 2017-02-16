@@ -15,7 +15,7 @@
                                     <h4>{{ $title }}</h4>
                             </div>
                             <div class="col-md-6">                            
-                                <a class="pull-right" href="{!! route('stuff')!!}"><button class="btn btn-info">Back</button></a>
+                                <a class="pull-right" href="{!! route('staff',$type)!!}"><button class="btn btn-info">Back</button></a>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                                 
                             <div class=" form"> 
 
-                                {!! Form::open(array('route' => 'stuff.store', 'method' => 'post', 'class' => 'cmxform form-horizontal tasi-form')) !!}
+                                {!! Form::open(array('route' => ['staff.store', $type], 'method' => 'post', 'class' => 'cmxform form-horizontal tasi-form')) !!}
 
 
                                 <div class="form-group">
@@ -46,11 +46,18 @@
                                         {!! Form::text('po', null, array('class' => 'form-control', 'placeholder' => 'P/O No')) !!}
                                     </div>
                                 </div>
+                                
+                                 <div class="form-group">
+                                    {!! Form::label('appointment', "Appointment", array('class' => 'control-label col-lg-2')) !!}
+                                    <div class="col-lg-6">
+                                        {!! Form::text('appointment', null, array('class' => 'form-control', 'placeholder' => 'Appointment')) !!}
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('type', "Stuff Category", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('contact', "Contact No", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::select('type', $types, null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('contact', null, array('class' => 'form-control', 'placeholder' => 'Contact No')) !!}
                                     </div>
                                 </div>
                                

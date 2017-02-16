@@ -55,12 +55,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'/*, 'role:admin'*/]], 
 	Route::group(['middleware' => ['role:admin|engineering|electrical|seamanship']],function()
 	{
 		//stuffs module
-		Route::get('stuff',['as' => 'stuff','uses' =>'AdminStuffController@index']);
-		Route::get('stuff/create',['as' => 'stuff.create','uses' =>'AdminStuffController@create']);
-		Route::post('stuff/create',['as' => 'stuff.store','uses' =>'AdminStuffController@store']);
-		Route::get('stuff/{stuff_id}/edit',['as' => 'stuff.edit','uses' =>'AdminStuffController@edit']);
-		Route::put('stuff/{stuff_id}/edit',['as' => 'stuff.update','uses' =>'AdminStuffController@update']);
-		Route::get('stuff/{stuff_id}/delete',['as' => 'stuff.delete','uses' =>'AdminStuffController@destroy']);
+		Route::get('staff/select',['as' => 'staff.select','uses' =>'AdminStuffController@select']);
+		Route::get('staff/{type}',['as' => 'staff','uses' =>'AdminStuffController@index']);
+		Route::get('staff/{type}/create',['as' => 'staff.create','uses' =>'AdminStuffController@create']);
+		Route::post('staff/{type}/create',['as' => 'staff.store','uses' =>'AdminStuffController@store']);
+		Route::get('staff/{staff_id}/edit',['as' => 'staff.edit','uses' =>'AdminStuffController@edit']);
+		Route::put('staff/{staff_id}/edit',['as' => 'staff.update','uses' =>'AdminStuffController@update']);
+		Route::get('staff/{staff_id}/delete',['as' => 'staff.delete','uses' =>'AdminStuffController@destroy']);
 
 		//FONI menu CRD
 		Route::get('foni', array('as' => 'foni', 'uses' => 'FilesController@foni'));

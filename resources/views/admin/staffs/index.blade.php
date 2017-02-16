@@ -22,10 +22,9 @@
                                     <div class="panel-heading">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <h4>Stuffs</h4>
                                             </div>
                                             <div class="col-md-6">
-                                                 <a class="pull-right" href="{!! route('stuff.create') !!}"><button class="btn btn-success">Add Stuff</button></a>
+                                                 <a class="pull-right" href="{!! route('staff.create',$type) !!}"><button class="btn btn-success">Add Staff</button></a>
                                             </div>
                                         </div>
                                     </div>
@@ -34,9 +33,10 @@
                                         <thead>
                                         <tr>
                                             <th>Serial No.</th>
-                                            <th>Rank & Name</th>
-                                            <th>Category</th>
                                             <th>P/O No.</th>
+                                            <th>Rank & Name</th>
+                                            <th>Appointment</th>
+                                            <th>Contact</th>
                                             <th>#</th>
                                         </tr>
                                         </thead>
@@ -45,12 +45,13 @@
 
                                             <tr>
                                                 <td>{!! $indx+1 !!}</td>
-                                                <td>{!! $demo->rank.' '.$demo->name !!}</td>
-                                                <td>{!! $demo->type !!}</td>
                                                 <td>{!! $demo->po !!}</td>
+                                                <td>{!! $demo->rank.' '.$demo->name !!}</td>
+                                                <td>{!! $demo->appointment !!}</td>
+                                                <td>{!! $demo->contact !!}</td>
                                                 <td>
-                                                    <a href="{!! route('stuff.edit',$demo->id) !!}" class="btn btn-success btn-xs btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
-                                                    <a href="{!! route('stuff.delete',$demo->id) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
+                                                    <a href="{!! route('staff.edit',$demo->id) !!}" class="btn btn-success btn-xs btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>
+                                                    <a href="{!! route('staff.delete',$demo->id) !!}" class="btn btn-danger btn-xs btn-archive deleteBtn" data-toggle="confirmation" data-title="Delete Data?">Delete</a>
                                                       
                                                 </td>
                                             </tr>

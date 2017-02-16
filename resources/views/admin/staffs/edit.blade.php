@@ -15,7 +15,7 @@
                                     <h4>{{ $title }}</h4>
                             </div>
                             <div class="col-md-6">                            
-                                <a class="pull-right" href="{!! route('stuff')!!}"><button class="btn btn-info">Back</button></a>
+                                <a class="pull-right" href="{!! route('staff',$staff->type)!!}"><button class="btn btn-info">Back</button></a>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                                 
                             <div class=" form"> 
 
-                                {!! Form::model($stuff, array('route' => ['stuff.update', $stuff->id] , 'method' => 'put', 'class' => 'cmxform form-horizontal tasi-form')) !!}
+                                {!! Form::model($staff, array('route' => ['staff.update', $staff->id] , 'method' => 'put', 'class' => 'cmxform form-horizontal tasi-form')) !!}
 
 
                                 <div class="form-group">
@@ -48,9 +48,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('type', "Stuff Category", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('appointment', "Appointment", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::select('type', $types, null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('appointment', null, array('class' => 'form-control', 'placeholder' => 'Appointment')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    {!! Form::label('contact', "Contact No", array('class' => 'control-label col-lg-2')) !!}
+                                    <div class="col-lg-6">
+                                        {!! Form::text('contact', null, array('class' => 'form-control', 'placeholder' => 'Contact No')) !!}
                                     </div>
                                 </div>
                                
