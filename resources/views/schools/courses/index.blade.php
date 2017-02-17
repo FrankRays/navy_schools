@@ -70,25 +70,31 @@
 
                                                 </td>
                                                 <td>@if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 8 && $today < $demo->start_date)
-                                                    FINAL PREPARATION
-                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 15 && $today < $demo->start_date)
-                                                    CLASS ROUTINE
-                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 31 && $today < $demo->start_date)
-                                                    PRE-COURSE MATERIAL
-                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 56 && $today < $demo->start_date)
-                                                    LETTER FOR VISIT PROGRAMME
-                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 61 && $today < $demo->start_date)
-                                                    COURSE YELLOW
-                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 76 && $today < $demo->start_date)
-                                                    COURSE SYLLABUS
-                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 90 && $today < $demo->start_date)
-                                                    INSTRUCTOR INVITATION
-                                                @elseif($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 91 && $today < $demo->start_date)
-                                                    COURSE WILL COMMENSE
-                                                @elseif($today >= $demo->start_date && $today <= $demo->end_date)
+                                                    FINAL PREPARATION<br>
+                                                @endif
+                                                @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 15 && $today < $demo->start_date)
+                                                    CLASS ROUTINE<br>
+                                                @endif
+                                                @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 31 && $today < $demo->start_date)
+                                                    PRE-COURSE MATERIAL<br>
+                                                @endif
+                                                @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 56 && $today < $demo->start_date)
+                                                    LETTER FOR VISIT PROGRAMME<br>
+                                                @endif
+                                                @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 61 && $today < $demo->start_date)
+                                                    COURSE YELLOW<br>
+                                                @endif
+                                                @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 76 && $today < $demo->start_date)
+                                                    COURSE SYLLABUS<br>
+                                                @endif
+                                                @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 90 && $today < $demo->start_date)
+                                                    INSTRUCTOR INVITATION<br>
+                                                @endif
+                                                @if($today->diffInDays(Carbon\Carbon::parse($demo->start_date)) < 91 && $today < $demo->start_date)
+                                                    COURSE WILL COMMENSE<br>
+                                                @endif
+                                                @if($today >= $demo->start_date && $today <= $demo->end_date)
                                                     STARTED
-                                                @else
-                                                other
                                                 @endif
                                                 </td>
                                                 <td>

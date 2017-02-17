@@ -87,11 +87,6 @@ class StudentsController extends Controller
                 $file->move(public_path().'/uploads/students', $name);
 
                 $student->photo_url = '/uploads/students/'.$name;
-            }else{
-
-                return redirect()->back()
-                ->withInput()
-                ->with('error','photo upload failed!');
             }
 
             $student->school_id = $school_id;

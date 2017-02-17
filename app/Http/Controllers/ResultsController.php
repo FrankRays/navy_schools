@@ -303,7 +303,13 @@ class ResultsController extends Controller
         $results = $class->results;
         $students = $class->students;
 
+        if(count($results) <= 0){
+            return redirect()->back()
+                ->with('error', 'You do not have any results to generate the final result');
+        }
+
         $rows = [];
+        $full_marks =0;
         $data = [];
 
         $marksheet = [];
@@ -323,22 +329,37 @@ class ResultsController extends Controller
                 $mark = Mark::where('result_id', $result['id'])
                             ->where('student_id', $student->id)
                             ->first();
-                $data[$indx][$in] = $mark->marks_obtained;
-                $percentage[$indx][$in] = ($mark->marks_obtained/$result['full_marks'])*100;
+                if($mark){
+                    $data[$indx][$in] = $mark->marks_obtained;
+                    $percentage[$indx][$in] = ($mark->marks_obtained/$result['full_marks'])*100;
+                }else{
+                    $data[$indx][$in] = null;
+                    $percentage[$indx][$in] = null;
+                }
             }
             $rows[] = $result['subject'];
+            $full_marks += $result['full_marks'];
         }
+
         $totals = [];
         $percentList = [];
         foreach ($students as $indx => $student) {
             $total = 0;
             $percent = 0;
-            for ($i=0; $i < count($data) ; $i++) { 
-                 $total += $data[$i][$indx];
-                 $percent += $percentage[$i][$indx];
+            $count = 0;
+            for ($i=0; $i < count($data) ; $i++) {
+                if($percentage[$i][$indx] !== null){
+                    $count++;
+                    $total += $data[$i][$indx];
+                    $percent += $percentage[$i][$indx];
+                } 
             }
             $totals[] = $total;
-            $percentList[] = $percent/count($percentage);
+            if($count > 0){
+                $percentList[] = $percent/$count;
+            }else{
+                $percentList[] = 0;
+            }
         }
 
         return view('schools.classes.results.final')
@@ -347,6 +368,7 @@ class ResultsController extends Controller
                 ->with('class_id', $class_id)
                 ->with('students', $students)
                 ->with('rows', $rows)
+                ->with('full_marks', $full_marks)
                 ->with('data', $data)
                 ->with('totals', $totals)
                 ->with('percentage', $percentList);

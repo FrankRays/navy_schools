@@ -40,10 +40,11 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($courses as $indx => $demo)
+                                        <?php $count=0; ?>
+                                        @foreach ($courses as $demo)
 
                                             <tr>
-                                                <td>{!! $indx+1 !!}</td>
+                                                <td>{!! ++$count !!}</td>
                                                 <td>{!! $demo->name !!}</td>
                                                 <td>{!! $demo->code !!}</td>
                                                 <td>{!! Carbon\Carbon::parse($demo->start_date)->format('d/m/Y') !!}</td>
