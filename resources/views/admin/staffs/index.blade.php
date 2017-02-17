@@ -94,7 +94,9 @@
 
             var table = $('#dataTable').dataTable({
                 "aaSorting": [],
-                "order": []
+                "order": [],
+                "pageLength": 20,
+                stateSave: true
             });
 
             $('[data-toggle=confirmation]').confirmation({

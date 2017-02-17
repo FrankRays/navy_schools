@@ -96,7 +96,9 @@
         $(document).ready(function() {
 
             var table = $('#dataTable').dataTable({
-                "aaSorting": []
+                "aaSorting": [],
+                "pageLength": 20,
+                stateSave: true
             });
 
             $('[data-toggle=confirmation]').confirmation({

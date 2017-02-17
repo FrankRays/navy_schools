@@ -117,8 +117,14 @@
 
         $(document).ready(function() {
 
-            var table1 = $('#dataTable1').dataTable();
-            var table2 = $('#dataTable2').dataTable();
+            var table1 = $('#dataTable1').dataTable({
+                "pageLength": 20,
+                stateSave: true
+            });
+            var table2 = $('#dataTable2').dataTable({
+                "pageLength": 20,
+                stateSave: true
+            });
 
             $('[data-toggle=confirmation]').confirmation({
               rootSelector: '[data-toggle=confirmation]',

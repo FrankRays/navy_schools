@@ -20,5 +20,4 @@
   	{!! Html::script('js/jquery.nicescroll.js') !!}
   	{!! Html::script('js/jquery.app.js') !!}
 
-
      @yield('script')

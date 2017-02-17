@@ -84,7 +84,10 @@
 
         $(document).ready(function() {
 
-            var table = $('#dataTable').dataTable();
+            var table = $('#dataTable').dataTable({
+                "pageLength": 20,
+                stateSave: true
+            });
 
             $('[data-toggle=confirmation]').confirmation({
               rootSelector: '[data-toggle=confirmation]',
