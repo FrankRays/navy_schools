@@ -18,7 +18,7 @@
                                     <li class="active"><a>Result</a></li>
                                     
                                     @if(!$class->approval)
-                                    <li class="pull-right btn btn-success btn-xs"><a href="{!! route('school.class.approve',[$school_id, $class->id]) !!}"><i class="fa fa-save"></i>Draft</a></li>
+                                    <li class="pull-right btn btn-success btn-xs"><a href="{!! route('school.class.result.approve',[$school_id, $class->id]) !!}"><i class="fa fa-save"></i>Draft</a></li>
                                     @endif
                                 </ul>
 
@@ -29,6 +29,10 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <h4>Results</h4>
+                                                <a 
+                                                 href="{!! route('school.class.result.final',[$school_id, $class->id]) !!}">
+                                                 <button class="btn btn-info">Final Result Sheet</button>
+                                                 </a>
                                             </div>
                                             <div class="col-md-6">
                                                  <a class="pull-right" 
@@ -44,6 +48,14 @@
                                         <tr>
                                             <th>Subject</th>
                                             <th>Result File</th>
+
+                                            @if($hasRight = Auth::user()->hasRole('admin')||
+                                                Auth::user()->hasRole('electrical')||
+                                                Auth::user()->hasRole('engineering')||
+                                                Auth::user()->hasRole('seamanship'))
+                                            <th>Verification</th>
+                                            @endif
+
                                             <th>#</th>
                                         </tr>
                                         </thead>
@@ -59,6 +71,16 @@
                                                 Not uploaded
                                                 @endif
                                                 </td>
+                                                @if($hasRight)
+                                                @if($demo->verification)
+                                                    <td class="panel info">verified</td>
+                                                @else
+                                                    <td class="panel danger">
+                                                        <a href="{!! route('school.class.result.approve',[$school_id, $class->id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive" style="margin-right: 3px;">Draft
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                                @endif
                                                 <td>
                                                   <a href="{!! route('school.class.result.show', [ $school_id, $class->id, $demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
                                                   <a href="{!! route('school.class.result.edit',[ $school_id, $class->id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>

@@ -23,6 +23,7 @@ class StudentsTableSeeder extends Seeder
         'rank'  =>  'major general',
         'blood_group' =>  'O+',
         'barrack_location'  =>  'Sylhet',
+        'permanent_address'  =>  'Dhaka Navy Hq',
         'mobile'  =>  '017777777'
       ]
     );

@@ -25,6 +25,7 @@ class CreateStudentsTable extends Migration
           $table->string('mobile')->nullable();
           $table->string('blood_group')->nullable();
           $table->string('barrack_location')->nullable();
+          $table->string('permanent_address')->nullable();
           $table->timestamps();
 
           $table->foreign('school_id')

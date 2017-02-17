@@ -1,7 +1,7 @@
 <!-- Footer Start -->
 <footer class="footer">
 	<center>
-	Copyright&copy; 2016 Navy School Mangement System, Bangladesh. All rights reserved.</center>
+	Copyright&copy; 2017 BNS SHAHEED MOAZZAM TRAINING SCHOOL MANAGEMENT SYSTEM. All rights reserved.</center>
 </footer>
 <!-- Footer Ends -->
 

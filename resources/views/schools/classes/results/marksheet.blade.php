@@ -63,9 +63,10 @@
                                             <th>Serial</th>
                                             <th>Rank & Name</th>
                                             <th>P/O No</th>
+                                            <th>Full Marks</th>
                                             <th>Marks Obtained</th>
                                             <th>Pass Marks</th>
-                                            <th>Full Marks</th>
+                                            <th>Percentage</th>
                                             <th>Remarks</th>
                                             <!-- <th>#</th> -->
                                         </tr>
@@ -77,6 +78,7 @@
                                                 <td>{!! $demo->serial_number !!}</td>
                                                 <td>{!! $demo->rank !!} {!! $demo->name !!}</td>
                                                 <td>{!! $demo->po_number !!}</td>
+                                                <td>{!! $result->full_marks !!}</td>
                                                 <td>
                                                 
                                                 {!! Form::open([ 
@@ -99,7 +101,7 @@
                                                 {!! Form::close() !!}
                                                 </td>
                                                 <td>{!! $result->full_marks/2 !!}</td>
-                                                <td>{!! $result->full_marks !!}</td>
+                                                <td>{!! (($demo->marks/$result->full_marks)*100).'%' !!}</td>
                                                 @if($demo->marks)
                                                     @if($demo->marks >= ($result->full_marks/2))
                                                     <td class="success"> Pass </td>

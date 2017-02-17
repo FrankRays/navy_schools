@@ -19,7 +19,9 @@
                                     <div id="aboutme" class="tab-pane active">
                                     <div class="profile-desk">
                                     @include('includes.alert')
+                                        @if($student->photo_url)
                                         <div class="img-wrapper m-r-15"><img src="{!! asset($student->photo_url) !!}" width="20%" alt="profile photo" class="br-radius"></div>
+                                        @endif
                                         <br>
                                         <h1>{!! $student->name !!}</h1>
                                         <table class="table table-condensed">
@@ -42,21 +44,36 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td><b>Full Name</b></td>
+                                                    <td>
+                                                        {!! $student->name !!}
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <td><b>Rank</b></td>
                                                     <td class="ng-binding">{!! $student->rank !!}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Contact No.</b></td>
+                                                    <td class="ng-binding">{!! $student->mobile !!}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Email</b></td>
+                                                    <td class="ng-binding">{!! $student->email !!}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>Blood Group</b></td>
                                                     <td class="ng-binding">{!! $student->blood_group !!}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Barrack Location</b></td>
+                                                    <td><b>Accommodation</b></td>
                                                     <td class="ng-binding">{!! $student->barrack_location !!}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Phone</b></td>
-                                                    <td class="ng-binding">{!! $student->mobile !!}</td>
+                                                    <td><b>Permanent Address</b></td>
+                                                    <td class="ng-binding">{!! $student->permanent_address !!}</td>
                                                 </tr>
+                                            
                                             </tbody>
                                         </table>
                                     </div> <!-- end profile-desk -->

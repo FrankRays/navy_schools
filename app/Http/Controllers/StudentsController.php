@@ -55,8 +55,8 @@ class StudentsController extends Controller
         $rules =[
             'name'  =>  'required',
             'email' =>  'required|email',
-            'photo_url' =>  'required|image',
-            'blood_group'   =>  'required',
+            'photo_url' =>  'image',
+            //'blood_group'   =>  'required',
             'serial_number' =>  'required',
             'po_number' =>  'required',
             'rank'  =>  'required',
@@ -98,12 +98,13 @@ class StudentsController extends Controller
             $student->class_id = $class_id;
             $student->name = $data['name'];
             $student->email = $data['email'];
-            $student->blood_group = $data['blood_group'];
+            $student->blood_group = isset($data['blood_group'])?$data['blood_group']:null;
             $student->rank = $data['rank'];
-            $student->mobile = $data['mobile'];
+            $student->mobile = isset($data['mobile'])?$data['mobile']:null;
             $student->serial_number = $data['serial_number'];
             $student->po_number = $data['po_number'];
             $student->barrack_location = $data['barrack_location'];
+            $student->permanent_address = isset($data['permanent_address'])?$data['permanent_address']:null;
 
             if($student->save()){
                 return redirect()->back()
@@ -161,8 +162,7 @@ class StudentsController extends Controller
         $student = Student::findOrFail($student_id);
 
         $rules =[
-            'email' =>  'email',
-            'photo_url' =>  'image'
+            'email' =>  'email'
         ];
 
         $data = $request->all();
@@ -198,6 +198,7 @@ class StudentsController extends Controller
             $student->serial_number = isset($data['serial_number']) ? $data['serial_number'] : $student->serial_number;
             $student->po_number = isset($data['po_number']) ? $data['po_number'] : $student->po_number;
             $student->barrack_location = isset($data['barrack_location']) ? $data['barrack_location'] : $student->barrack_location;
+            $student->permanent_address = isset($data['permanent_address']) ? $data['permanent_address'] : $student->permanent_address;
 
             if($student->save()){
                 return redirect()->back()

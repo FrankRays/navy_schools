@@ -18,6 +18,7 @@ class CreateResultsTable extends Migration
             $table->string('subject');
             $table->float('full_marks')->nullable();
             $table->string('file_path')->nullable();
+            $table->boolean('verification')->default(false);
             $table->timestamps();
 
             $table->foreign('class_id')

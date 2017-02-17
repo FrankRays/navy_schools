@@ -279,4 +279,77 @@ class ResultsController extends Controller
                 ->with('error','failed to delete results!');
             }
     }
+
+    public function approve($school_id, $class_id, $result_id){
+        
+        $result = Result::findOrFail($result_id);
+        
+        $result->verification = true;
+
+        if($result->save()){
+            return redirect()->back()
+                ->with('success', 'result verified successfully');
+        }else{
+            return redirect()->back()
+                ->withInput()
+                ->with('error','failed to verify result!');
+            }
+    }
+
+    public function finalResult($school_id, $class_id){
+        
+        $class = Classes::where('id', $class_id)->with('students')->with('results')->first();
+
+        $results = $class->results;
+        $students = $class->students;
+
+        $rows = [];
+        $data = [];
+
+        $marksheet = [];
+        $percentage = [];
+
+        foreach ($results as $key => $result) {
+            $marksheet[] = [
+                            'id'      => $result->id,
+                            'subject' => $result->subject,
+                            'full_marks' => $result->full_marks
+                        ];
+
+        }
+
+        foreach ($marksheet as $indx=>$result) {
+            foreach ($students as $in=>$student) {
+                $mark = Mark::where('result_id', $result['id'])
+                            ->where('student_id', $student->id)
+                            ->first();
+                $data[$indx][$in] = $mark->marks_obtained;
+                $percentage[$indx][$in] = ($mark->marks_obtained/$result['full_marks'])*100;
+            }
+            $rows[] = $result['subject'];
+        }
+        $totals = [];
+        $percentList = [];
+        foreach ($students as $indx => $student) {
+            $total = 0;
+            $percent = 0;
+            for ($i=0; $i < count($data) ; $i++) { 
+                 $total += $data[$i][$indx];
+                 $percent += $percentage[$i][$indx];
+            }
+            $totals[] = $total;
+            $percentList[] = $percent/count($percentage);
+        }
+
+        return view('schools.classes.results.final')
+                ->with('title', "Final Result Sheet")
+                ->with('school_id', $school_id)
+                ->with('class_id', $class_id)
+                ->with('students', $students)
+                ->with('rows', $rows)
+                ->with('data', $data)
+                ->with('totals', $totals)
+                ->with('percentage', $percentList);
+
+    }
 }

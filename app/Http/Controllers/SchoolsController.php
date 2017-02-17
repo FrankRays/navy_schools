@@ -43,11 +43,27 @@ class SchoolsController extends Controller
                             ->orderBy('id', 'DESC')
                             ->get();
 
+        //listing ongoin courses at the top
+        
+        $date = Carbon::now();
+        $courseList = [];
+
+        foreach ($courses as $indx => $course) {
+            if($course->start_date <= $date && $course->end_date >= $date){
+                $courseList[] = $course;
+                unset($courses[$indx]);
+            }
+        }
+
+        foreach ($courses as $indx => $course) {
+            $courseList[] = $course;
+        }
+
         return view('schools.courses.index')
                 ->with('title', 'Courses')
                 ->with('school_id', $id)
                 ->with('today', Carbon::now())
-                ->with('classes', $courses);
+                ->with('classes', $courseList);
     }
 
     public function ongoingCourses($school_id)

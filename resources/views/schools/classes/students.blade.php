@@ -41,8 +41,8 @@
                                         <tr>
                                             <th>Serial No.</th>
                                             <th>P/O No.</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
+                                            <th>Rank & Name</th>
+                                            <th>Contact No.</th>
                                             <th>#</th>
                                         </tr>
                                         </thead>
@@ -52,8 +52,8 @@
                                             <tr>
                                                 <td>{!! $demo->serial_number !!}</td>
                                                 <td>{!! $demo->po_number !!}</td>
-                                                <td>{!! $demo->name !!}</td>
-                                                <td>{!! $demo->email !!}</td>
+                                                <td>{!! $demo->rank.' '.$demo->name !!}</td>
+                                                <td>{!! $demo->mobile !!}</td>
                                                 <td>
                                                   <a href="{!! route('school.class.student.show', [ $school_id, $class->id, $demo->id]) !!}" class="btn btn-info btn-xs btn-archive" style="margin-right: 3px;">Details</a>
                                                   <a href="{!! route('school.class.student.edit',[ $school_id, $class->id, $demo->id]) !!}" class="btn btn-success btn-xs btn-archive edit-demo-modal" href="#" style="margin-right: 3px;">Edit</a>

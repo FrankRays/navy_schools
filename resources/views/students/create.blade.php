@@ -44,7 +44,7 @@
                                  <div class="form-group">
                                     {!! Form::label('photo_url', "Photo", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::file('photo_url', null, array('class' => 'form-control', 'placeholder' => 'Image of the Student', 'required' => 'required')) !!}
+                                        {!! Form::file('photo_url', null, array('class' => 'form-control', 'placeholder' => 'Image of the Student')) !!}
                                     </div>
                                 </div>
 
@@ -73,14 +73,14 @@
                                 <div class="form-group">
                                     {!! Form::label('blood_group', "Blood Group", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('blood_group', null, array('class' => 'form-control','placeholder' => 'Rank','required')) !!}
+                                        {!! Form::text('blood_group', null, array('class' => 'form-control','placeholder' => 'Rank')) !!}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('mobile', "Mobile", array('class' => 'control-label col-lg-2')) !!}
+                                    {!! Form::label('mobile', "Contact No.", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
-                                        {!! Form::text('mobile', null, array('class' => 'form-control','placeholder' => 'Rank', 'required')) !!}
+                                        {!! Form::text('mobile', null, array('class' => 'form-control','placeholder' => 'Contact No')) !!}
                                     </div>
                                 </div>
 
@@ -88,6 +88,13 @@
                                     {!! Form::label('barrack_location', "Barrack Location", array('class' => 'control-label col-lg-2')) !!}
                                     <div class="col-lg-6">
                                         {!! Form::text('barrack_location', null, array('class' => 'form-control','placeholder' => 'Barrack Location', 'required')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    {!! Form::label('permanent_address', "Permanent Address", array('class' => 'control-label col-lg-2')) !!}
+                                    <div class="col-lg-6">
+                                        {!! Form::text('permanent_address', null, array('class' => 'form-control','placeholder' => 'Permanent Address')) !!}
                                     </div>
                                 </div>
 
